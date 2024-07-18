@@ -87,11 +87,6 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Fetch",
-          href: "/docs/hooks/fetch",
-          items: [],
-        },
-        {
           title: "Geolocation",
           href: "/docs/hooks/geolocation",
           items: [],
@@ -117,16 +112,6 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Interval",
-          href: "/docs/hooks/interval",
-          items: [],
-        },
-        {
-          title: "Interval When",
-          href: "/docs/hooks/interval-when",
-          items: [],
-        },
-        {
           title: "Is Client",
           href: "/docs/hooks/is-client",
           items: [],
@@ -134,11 +119,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "Is First Render",
           href: "/docs/hooks/is-first-render",
-          items: [],
-        },
-        {
-          title: "Key Press",
-          href: "/docs/hooks/key-press",
           items: [],
         },
         {
@@ -154,11 +134,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "Lock Body Scroll",
           href: "/docs/hooks/lock-body-scroll",
-          items: [],
-        },
-        {
-          title: "Logger",
-          href: "/docs/hooks/logger",
           items: [],
         },
         {
@@ -202,11 +177,6 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Page Leave",
-          href: "/docs/hooks/page-leave",
-          items: [],
-        },
-        {
           title: "Preferred Language",
           href: "/docs/hooks/preferred-language",
           items: [],
@@ -219,11 +189,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "Queue",
           href: "/docs/hooks/queue",
-          items: [],
-        },
-        {
-          title: "Random Interval",
-          href: "/docs/hooks/random-interval",
           items: [],
         },
         {
@@ -254,11 +219,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "Throttle",
           href: "/docs/hooks/throttle",
-          items: [],
-        },
-        {
-          title: "Timeout",
-          href: "/docs/hooks/timeout",
           items: [],
         },
         {
