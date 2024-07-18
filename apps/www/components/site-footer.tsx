@@ -20,7 +20,7 @@ export function SiteFooter() {
               ScriptKavi.
             </Link>
           </div>
-          <div>
+          <div className="hidden md:block lg:block">
             Hosted on{" "}
             <Link
               href="https://www.netlify.com"
@@ -30,7 +30,7 @@ export function SiteFooter() {
               Netlify.
             </Link>
           </div>
-          <div>
+          <div className="hidden md:block lg:block">
             The source code is available on{" "}
             <Link
               href={siteConfig.links.github}

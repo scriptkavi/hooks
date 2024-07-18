@@ -63,7 +63,7 @@ export default function IndexPage() {
             </div>
           </PageFrameworks>
         </div>
-        <div className="relative flex h-[250px] w-[400px] flex-col items-center justify-center overflow-hidden rounded-lg border bg-background ">
+        <div className="relative hidden h-[250px] w-[400px] flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:flex lg:flex">
           <WordRotate
             className="text-4xl font-bold text-black dark:text-white"
             words={[
