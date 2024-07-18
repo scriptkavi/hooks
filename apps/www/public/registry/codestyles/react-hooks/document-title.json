@@ -1,0 +1,11 @@
+{
+  "name": "document-title",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "document-title.ts",
+      "content": "import * as React from \"react\"\n\nexport function useDocumentTitle(title: string): void {\n  React.useEffect(() => {\n    document.title = title\n  }, [title])\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

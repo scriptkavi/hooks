@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "codestyle": {
+      "type": "string",
+      "enum": ["react-hooks"]
+    },
+    "tsx": {
+      "type": "boolean"
+    },
+    "aliases": {
+      "type": "object",
+      "properties": {
+        "utils": {
+          "type": "string"
+        },
+        "hooks": {
+          "type": "string"
+        }
+      },
+      "required": ["utils", "hooks"]
+    }
+  },
+  "required": ["codestyle", "aliases"]
+}

@@ -1,0 +1,108 @@
+---
+title: Next.js
+description: Install and configure Next.js.
+---
+
+<Steps>
+
+### Create project
+
+Start by creating a new Next.js project using `create-next-app`:
+
+```bash
+npx create-next-app@latest my-app --typescript --eslint
+```
+
+### Run the CLI
+
+Run the `scriptkavi-hooks` init command to setup your project:
+
+```bash
+npx scriptkavi-hooks@latest init
+```
+
+### Configure hooks.json
+
+You will be asked a few questions to configure `hooks.json`:
+
+```txt showLineNumbers
+Would you like to use TypeScript (recommended)? no/yes
+Which codestyle would you like to use? › React Hooks
+Configure the import alias for hooks: › @/hooks
+Configure the import alias for utils: › @/lib/utils
+```
+
+### App structure
+
+Here's how I structure my Next.js apps. You can use this as a reference:
+
+```txt {6-10,14-15}
+.
+├── app
+│   ├── layout.tsx
+│   └── page.tsx
+├── hooks
+│   ├── hook
+│   │   ├── debounce.ts
+│   │   ├── battery.ts
+│   │   ├── copy-to-clipboard.ts
+│   │   └── ...
+│   ├── main-nav.tsx
+│   ├── page-header.tsx
+│   └── ...
+├── lib
+│   └── utils.ts
+├── styles
+│   └── globals.css
+├── next.config.js
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+└── tsconfig.json
+```
+
+- I place the hooks in the `hooks/hook` folder.
+
+### That's it
+
+You can now start adding hooks to your project.
+
+```bash
+npx scriptkavi-hooks@latest add debounce
+```
+
+The command above will add the `Debounce` hook to your project. You can then import it like this:
+
+```tsx {1,6} showLineNumbers
+import { useDebounce } from "@/hooks/debounce"
+
+export default function App() {
+  const [searchTerm, setSearchTerm] = React.useState("js")
+  const debouncedSearchTerm = useDebounce(searchTerm, 300)
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  React.useEffect(() => {
+    const callApi = async () => {
+      if (debouncedSearchTerm) {
+        // Call Api
+      }
+    }
+    callApi()
+  }, [debouncedSearchTerm])
+
+  return (
+    <form>
+      <input
+        name="search"
+        placeholder="Search something..."
+        onChange={handleChange}
+      />
+    </form>
+  )
+}
+```
+
+</Steps>

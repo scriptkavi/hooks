@@ -1,0 +1,11 @@
+{
+  "name": "intersection-observer",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "intersection-observer.ts",
+      "content": "import * as React from \"react\"\n\ninterface IntersectionObserverOptions {\n  threshold?: number | number[]\n  root?: Element | Document | null\n  rootMargin?: string\n}\n\nexport function useIntersectionObserver(\n  options: IntersectionObserverOptions = {}\n): [(node: Element | null) => void, IntersectionObserverEntry | null] {\n  const { threshold = 1, root = null, rootMargin = \"0px\" } = options\n  const [entry, setEntry] = React.useState<IntersectionObserverEntry | null>(\n    null\n  )\n\n  const previousObserver = React.useRef<IntersectionObserver | null>(null)\n\n  const customRef = React.useCallback(\n    (node: Element | null) => {\n      if (previousObserver.current) {\n        previousObserver.current.disconnect()\n        previousObserver.current = null\n      }\n\n      if (node) {\n        const observer = new IntersectionObserver(\n          ([entry]) => {\n            setEntry(entry)\n          },\n          { threshold, root, rootMargin }\n        )\n\n        observer.observe(node)\n        previousObserver.current = observer\n      }\n    },\n    [threshold, root, rootMargin]\n  )\n\n  return [customRef, entry]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,107 @@
+---
+title: Lock Body Scroll
+description: Temporarily disable scrolling on the document body
+component: true
+---
+
+## About
+
+The `useLockBodyScroll` hook temporarily disables scrolling on the document body. This is beneficial when displaying a modal, dropdown menu, or any component requiring user focus. The hook returns a cleanup function that restores the original overflow style once the component is unmounted or no longer needed, reverting scroll behavior to its previous state.
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add lock-body-scroll
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="lock-body-scroll" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useLockBodyScroll } from "@/hooks/lock-body-scroll"
+```
+
+```tsx
+import * as React from "react"
+
+import DemoContent from "./DemoContent"
+import { closeIcon } from "./icons"
+
+function Modal({ handleClose }) {
+  useLockBodyScroll()
+
+  return (
+    <div>
+      <dialog>
+        <header>
+          <button onClick={handleClose}>{closeIcon}</button>
+          <h2>Modal</h2>
+        </header>
+        <section>
+          <DemoContent />
+        </section>
+      </dialog>
+    </div>
+  )
+}
+
+export default function App() {
+  const [isOpen, setIsOpen] = React.useState(false)
+  return (
+    <>
+      {isOpen && <Modal handleClose={() => setIsOpen(false)} />}
+      <main>
+        <header>
+          <h1>useLockBodyScroll</h1>
+        </header>
+        {["red", "blue", "green", "pink", "purple", "yellow"].map((color) => {
+          return (
+            <section
+              style={{
+                backgroundColor: `var(--${color})`,
+                width: "100%",
+                height: "50vh",
+              }}
+            />
+          )
+        })}
+        <button className="primary" onClick={() => setIsOpen(true)}>
+          openModal
+        </button>
+      </main>
+    </>
+  )
+}
+```

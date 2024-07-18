@@ -1,0 +1,135 @@
+---
+title: Object State
+description: Manage complex state objects
+component: true
+---
+
+## About
+
+The `useObjectState` hook manages complex state objects, providing a convenient way to initialize and update state values using a single hook. It allows easy creation and maintenance of state objects with initial values and includes a flexible “handleUpdate” function to merge new values into the existing state object.
+
+## Parameters
+
+| Name         | Type   | Description                         |
+| ------------ | ------ | ----------------------------------- |
+| initialValue | object | (Optional) The initial state value. |
+
+## Return Values
+
+| Index | Type     | Description                            |
+| ----- | -------- | -------------------------------------- |
+| 0     | object   | The current state object.              |
+| 1     | function | A function to update the state object. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add object-state
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="object-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useObjectState } from "@/hooks/object-state"
+```
+
+```tsx
+import * as React from "react"
+
+const initialState = {
+  team: "Utah Jazz",
+  wins: 2138,
+  losses: 1789,
+  championships: 0,
+}
+
+export default function App() {
+  const [stats, setStats] = useObjectState(initialState)
+
+  const addWin = () => {
+    setStats((s) => ({
+      wins: s.wins + 1,
+    }))
+  }
+
+  const addLoss = () => {
+    setStats((s) => ({
+      losses: s.losses + 1,
+    }))
+  }
+
+  const reset = () => {
+    setStats(initialState)
+  }
+
+  return (
+    <section>
+      <h1>useObjectState</h1>
+
+      <button className="link" onClick={addWin}>
+        Add Win
+      </button>
+      <button className="link" onClick={addLoss}>
+        Add Loss
+      </button>
+
+      <button className="link" onClick={() => alert("lol")}>
+        Add Championship
+      </button>
+      <button className="link" onClick={reset}>
+        Reset
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            {Object.keys(stats).map((key) => {
+              return <th>{key}</th>
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {Object.keys(stats).map((key) => {
+              return <td>{`${stats[key]}`}</td>
+            })}
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```

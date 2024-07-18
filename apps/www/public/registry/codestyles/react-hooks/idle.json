@@ -1,0 +1,11 @@
+{
+  "name": "idle",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "idle.ts",
+      "content": "import * as React from \"react\"\n\nfunction throttle(cb: () => void, ms: number): () => void {\n  let lastTime = 0\n  return () => {\n    const now = Date.now()\n    if (now - lastTime >= ms) {\n      cb()\n      lastTime = now\n    }\n  }\n}\n\nexport function useIdle(ms: number = 1000 * 60): boolean {\n  const [idle, setIdle] = React.useState(false)\n\n  React.useEffect(() => {\n    let timeoutId: number\n\n    const handleTimeout = () => {\n      setIdle(true)\n    }\n\n    const handleEvent = throttle(() => {\n      setIdle(false)\n\n      window.clearTimeout(timeoutId)\n      timeoutId = window.setTimeout(handleTimeout, ms)\n    }, 500)\n\n    const handleVisibilityChange = () => {\n      if (!document.hidden) {\n        handleEvent()\n      }\n    }\n\n    timeoutId = window.setTimeout(handleTimeout, ms)\n\n    window.addEventListener(\"mousemove\", handleEvent)\n    window.addEventListener(\"mousedown\", handleEvent)\n    window.addEventListener(\"resize\", handleEvent)\n    window.addEventListener(\"keydown\", handleEvent)\n    window.addEventListener(\"touchstart\", handleEvent)\n    window.addEventListener(\"wheel\", handleEvent)\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange)\n\n    return () => {\n      window.removeEventListener(\"mousemove\", handleEvent)\n      window.removeEventListener(\"mousedown\", handleEvent)\n      window.removeEventListener(\"resize\", handleEvent)\n      window.removeEventListener(\"keydown\", handleEvent)\n      window.removeEventListener(\"touchstart\", handleEvent)\n      window.removeEventListener(\"wheel\", handleEvent)\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange)\n      window.clearTimeout(timeoutId)\n    }\n  }, [ms])\n\n  return idle\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

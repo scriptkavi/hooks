@@ -1,0 +1,110 @@
+---
+title: Media Query
+description: Subscribe and respond to media query changes
+component: true
+---
+
+## About
+
+The `useMediaQuery` hook leverages the window.matchMedia API to subscribe to CSS media query changes, providing real-time responsiveness to viewport or screen orientation changes. It allows the component to rerender whenever the media query result changes and throws an error if used server-side (as media queries only work in the browser).
+
+## Parameters
+
+| Name  | Type   | Description                       |
+| ----- | ------ | --------------------------------- |
+| query | string | The media query to listen changes |
+
+## Return Values
+
+| Type    | Description                                                                                         |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| boolean | Returns a boolean value indicating whether the media query matches the current state of the device. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add media-query
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="media-query" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useMediaQuery } from "@/hooks/media-query"
+```
+
+```tsx
+import * as React from "react"
+
+import { desktop, laptop, phone, tablet } from "./icons"
+
+export default function App() {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)")
+  const isMediumDevice = useMediaQuery(
+    "only screen and (min-width : 769px) and (max-width : 992px)"
+  )
+  const isLargeDevice = useMediaQuery(
+    "only screen and (min-width : 993px) and (max-width : 1200px)"
+  )
+  const isExtraLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1201px)"
+  )
+
+  return (
+    <section>
+      <h1>useMediaQuery</h1>
+      Resize your browser windows to see changes.
+      <article>
+        <figure className={isSmallDevice ? "active" : ""}>
+          {phone}
+          <figcaption>Small</figcaption>
+        </figure>
+        <figure className={isMediumDevice ? "active" : ""}>
+          {tablet}
+          <figcaption>Medium</figcaption>
+        </figure>
+        <figure className={isLargeDevice ? "active" : ""}>
+          {laptop}
+          <figcaption>Large</figcaption>
+        </figure>
+        <figure className={isExtraLargeDevice ? "active" : ""}>
+          {desktop}
+          <figcaption>Extra Large</figcaption>
+        </figure>
+      </article>
+    </section>
+  )
+}
+```

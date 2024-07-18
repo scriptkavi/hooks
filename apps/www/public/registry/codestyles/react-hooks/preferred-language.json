@@ -1,0 +1,11 @@
+{
+  "name": "preferred-language",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "preferred-language.ts",
+      "content": "import * as React from \"react\"\n\nconst usePreferredLanguageSubscribe = (cb: () => void): (() => void) => {\n  window.addEventListener(\"languagechange\", cb)\n  return () => window.removeEventListener(\"languagechange\", cb)\n}\n\nconst getPreferredLanguageSnapshot = (): string => {\n  return navigator.language\n}\n\nconst getPreferredLanguageServerSnapshot = (): never => {\n  throw Error(\"usePreferredLanguage is a client-only hook\")\n}\n\nexport function usePreferredLanguage(): string {\n  return React.useSyncExternalStore(\n    usePreferredLanguageSubscribe,\n    getPreferredLanguageSnapshot,\n    getPreferredLanguageServerSnapshot\n  )\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

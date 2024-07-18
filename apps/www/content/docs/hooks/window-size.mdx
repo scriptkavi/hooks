@@ -1,0 +1,99 @@
+---
+title: Window Size
+description: Track the dimensions of the browser window
+component: true
+---
+
+## About
+
+The `useWindowSize` hook retrieves and tracks the dimensions of the browser window within a React component. It attaches an event listener to the “resize” event, ensuring that the size updates dynamically whenever the window is resized. The hook returns the “size” object, enabling components to access and utilize the window dimensions for purposes like responsive layout adjustments, conditional rendering, or space-based calculations.
+
+## Return Values
+
+| Name   | Type   | Description                                  |
+| ------ | ------ | -------------------------------------------- |
+| width  | number | The current width of the window, in pixels.  |
+| height | number | The current height of the window, in pixels. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add window-size
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="window-size" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useWindowSize } from "@/hooks/window-size"
+```
+
+```tsx
+import * as React from "react"
+
+function Browser({ size }) {
+  return (
+    <div
+      data-testid="browser"
+      className="browser"
+      style={{ width: size.width / 4, height: size.height / 4 }}
+    />
+  )
+}
+
+export default function App() {
+  const size = useWindowSize()
+
+  return (
+    <section>
+      <h1>useWindowSize</h1>
+      <p>Resize the window</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>width</th>
+            <td>{size.width}</td>
+          </tr>
+          <tr>
+            <th>height</th>
+            <td>{size.height}</td>
+          </tr>
+        </tbody>
+      </table>
+      <Browser size={size} />
+    </section>
+  )
+}
+```

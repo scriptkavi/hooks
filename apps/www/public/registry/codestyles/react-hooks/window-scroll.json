@@ -1,0 +1,11 @@
+{
+  "name": "window-scroll",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "window-scroll.ts",
+      "content": "import * as React from \"react\"\n\ninterface WindowScrollState {\n  x: number | null\n  y: number | null\n}\n\nexport function useWindowScroll(): [\n  WindowScrollState,\n  (scroll: ScrollToOptions | [number, number]) => void\n] {\n  const [state, setState] = React.useState<WindowScrollState>({\n    x: null,\n    y: null,\n  })\n\n  const scrollTo = React.useCallback(\n    (scroll: ScrollToOptions | [number, number]) => {\n      if (Array.isArray(scroll)) {\n        const [x, y] = scroll\n        window.scrollTo(x, y)\n      } else {\n        window.scrollTo(scroll)\n      }\n    },\n    []\n  )\n\n  React.useLayoutEffect(() => {\n    const handleScroll = () => {\n      setState({ x: window.scrollX, y: window.scrollY })\n    }\n\n    handleScroll()\n    window.addEventListener(\"scroll\", handleScroll)\n\n    return () => {\n      window.removeEventListener(\"scroll\", handleScroll)\n    }\n  }, [])\n\n  return [state, scrollTo]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

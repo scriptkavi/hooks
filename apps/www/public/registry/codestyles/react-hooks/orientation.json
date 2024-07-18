@@ -1,0 +1,11 @@
+{
+  "name": "orientation",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "orientation.ts",
+      "content": "import * as React from \"react\"\n\ninterface OrientationState {\n  angle: number\n  type: string\n}\n\nexport function useOrientation(): OrientationState {\n  const [orientation, setOrientation] = React.useState<OrientationState>({\n    angle: 0,\n    type: \"landscape-primary\",\n  })\n\n  React.useLayoutEffect(() => {\n    const handleChange = () => {\n      const { angle, type } = window.screen.orientation\n      setOrientation({\n        angle,\n        type,\n      })\n    }\n\n    const handle_orientationchange = () => {\n      setOrientation({\n        type: \"UNKNOWN\",\n        angle: window.orientation as number,\n      })\n    }\n\n    if (window.screen?.orientation) {\n      handleChange()\n      window.screen.orientation.addEventListener(\"change\", handleChange)\n    } else {\n      handle_orientationchange()\n      window.addEventListener(\"orientationchange\", handle_orientationchange)\n    }\n\n    return () => {\n      if (window.screen?.orientation) {\n        window.screen.orientation.removeEventListener(\"change\", handleChange)\n      } else {\n        window.removeEventListener(\n          \"orientationchange\",\n          handle_orientationchange\n        )\n      }\n    }\n  }, [])\n\n  return orientation\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

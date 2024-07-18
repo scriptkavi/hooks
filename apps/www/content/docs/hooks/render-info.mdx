@@ -1,0 +1,100 @@
+---
+title: Render Info
+description: Debug renders and improve performance
+component: true
+---
+
+## About
+
+The `useRenderInfo` hook tracks and logs rendering information in a component. It keeps track of the number of renders, the time elapsed since the last render, and the timestamp of the current render. This hook is particularly helpful during development, providing insights into the rendering behavior of a component for performance optimization and issue identification.
+
+## Return Values
+
+| Name                 | Type   | Description                                                       |
+| -------------------- | ------ | ----------------------------------------------------------------- |
+| info                 | object | An object containing information about the component’s rendering. |
+| info.name            | string | The name of the component.                                        |
+| info.renders         | number | The number of times the component has rendered.                   |
+| info.sinceLastRender | number | The time elapsed in milliseconds since the last render.           |
+| info.timestamp       | number | The timestamp of the current render.                              |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add render-info
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="render-info" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useRenderInfo } from "@/hooks/render-info"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const info = useRenderInfo("App")
+
+  const [count, setCount] = React.useState(0)
+
+  return (
+    <section>
+      <h1>useRenderInfo</h1>
+      <button className="primary" onClick={() => setCount(count + 1)}>
+        Re-Render
+      </button>
+      <table>
+        <thead>
+          <tr>
+            <th colSpan={2}>Render Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(info).map((key) => {
+            return (
+              <tr key={key}>
+                <th>{key}</th>
+                <td>{info[key]}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```

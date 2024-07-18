@@ -1,0 +1,92 @@
+---
+title: Network State
+description: Monitor and adapt to network conditions seamlessly
+component: true
+---
+
+## About
+
+The `useNetworkState` hook delivers real-time insights about the network status in your application, helping adapt app behavior to varying connectivity conditions. It offers up-to-date snapshots of the network state, such as online/offline status, connection speed, and type, fostering a seamless user experience even under unstable or varying connectivity. This hook is intended for client-side use only.
+
+## Return Values
+
+| Name          | Type    | Description                                                                                                                                                                                          |
+| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| online        | boolean | Indicates whether the browser is online or offline.                                                                                                                                                  |
+| downlink      | number  | The effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.                                                                                 |
+| downlinkMax   | number  | The maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.                                                                                                 |
+| effectiveType | string  | The effective type of the connection for general web browsing purposes (either 'slow-2g', '2g', '3g', or '4g').                                                                                      |
+| rtt           | number  | The estimated round-trip latency of the connection, in milliseconds.                                                                                                                                 |
+| saveData      | boolean | Whether the user has requested a reduced data usage mode from the user agent.                                                                                                                        |
+| type          | string  | The type of connection a device is using to communicate with the network. It could be one of the following values: 'bluetooth', 'cellular', 'ethernet', 'none', 'wifi', 'wimax', 'other', 'unknown'. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add network-state
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="network-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useNetworkState } from "@/hooks/network-state"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const network = useNetworkState()
+
+  return (
+    <section>
+      <h1>useNetworkState</h1>
+      <table>
+        <tbody>
+          {Object.keys(network).map((key) => {
+            return (
+              <tr key={key} className={key}>
+                <th>{key}</th>
+                <td>{`${network[key]}`}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```

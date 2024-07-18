@@ -1,0 +1,84 @@
+---
+title: Idle
+description: Detect user inactivity
+component: true
+---
+
+## About
+
+The `useIdle` hook is a valuable tool for detecting user inactivity within a web application. It tracks user interaction and determines if a specified duration of inactivity has occurred, making it useful for implementing features like automatic logout, inactivity notifications, or UI adjustments based on user engagement.
+
+## Parameters
+
+| Name | Type   | Description                                                                                                                                            |
+| ---- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ms   | number | This is the duration of idle time (in milliseconds) after which the `idle` state will be set to `true`. The default value is `20 * 1000` (20 seconds). |
+
+## Return Values
+
+| Name | Type    | Description                                                                                                      |
+| ---- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| idle | boolean | A boolean indicating if the user is idle. It is `true` if the user has been idle for at least `ms` milliseconds. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add idle
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="idle" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useIdle } from "@/hooks/idle"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const idle = useIdle(5000)
+  return (
+    <section>
+      <h1>useIdle</h1>
+      <div>
+        <span className={idle ? "idle" : ""} />
+        <label>Status: {idle ? "Idle" : "Active"}</label>
+      </div>
+      {idle ? <p>Time to move your mouse</p> : <p>Hold still and wait</p>}
+    </section>
+  )
+}
+```

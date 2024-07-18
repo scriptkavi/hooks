@@ -1,0 +1,123 @@
+---
+title: Queue
+description: Add, remove, and clear element from a queue data structure
+component: true
+---
+
+## About
+
+The `useQueue` hook manages a queue of elements within a functional component. It allows easy addition, removal, and clearing of elements from the queue while maintaining state updates. The hook returns an object that includes functions for manipulating the queue (add, remove, and clear), as well as properties like first, last, size, and queue.
+
+## Parameters
+
+| Name         | Type  | Description                                                            |
+| ------------ | ----- | ---------------------------------------------------------------------- |
+| initialValue | array | (Optional) The initial value for the queue. Default is an empty array. |
+
+## Return Values
+
+| Name   | Type     | Description                                           |
+| ------ | -------- | ----------------------------------------------------- |
+| add    | function | Adds an element to the end of the queue.              |
+| remove | function | Removes and returns the first element from the queue. |
+| clear  | function | Clears the queue, removing all elements.              |
+| first  | any      | The first element in the queue.                       |
+| last   | any      | The last element in the queue.                        |
+| size   | number   | The number of elements in the queue.                  |
+| queue  | array    | The current array representing the queue.             |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add queue
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="queue" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useQueue } from "@/hooks/queue"
+```
+
+```tsx
+import * as React from "react"
+
+function QueueDemo({ first, last, size, queue }) {
+  return (
+    <figure>
+      <article>
+        <p>Front</p>
+        <ul>
+          {queue.map((item, i) => {
+            const isFirst = first === item
+            const isLast = last === item
+            if (isFirst) {
+              return <li key={i}>First: {item}</li>
+            }
+            if (isLast) {
+              return <li key={i}>Last: {item}</li>
+            }
+            return <li key={i}>Item: {item}</li>
+          })}
+        </ul>
+        <p>Back</p>
+      </article>
+      <figcaption>{size} items in the queue</figcaption>
+    </figure>
+  )
+}
+
+export default function App() {
+  const { add, remove, clear, first, last, size, queue } = useQueue([1, 2, 3])
+
+  return (
+    <div>
+      <header>
+        <h1>UseQueue</h1>
+        <button className="link" onClick={() => add((last || 0) + 1)}>
+          Add
+        </button>
+        <button disabled={size === 0} className="link" onClick={() => remove()}>
+          Remove
+        </button>
+        <button disabled={size === 0} className="link" onClick={() => clear()}>
+          Clear
+        </button>
+      </header>
+      <QueueDemo queue={queue} size={size} first={first} last={last} />
+    </div>
+  )
+}
+```

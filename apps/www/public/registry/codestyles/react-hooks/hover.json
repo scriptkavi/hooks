@@ -1,0 +1,11 @@
+{
+  "name": "hover",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "hover.ts",
+      "content": "import * as React from \"react\"\n\nexport function useHover<T extends HTMLElement>(): [\n  (node: T | null) => void,\n  boolean\n] {\n  const [hovering, setHovering] = React.useState(false)\n  const previousNode = React.useRef<T | null>(null)\n\n  const handleMouseEnter = React.useCallback(() => {\n    setHovering(true)\n  }, [])\n\n  const handleMouseLeave = React.useCallback(() => {\n    setHovering(false)\n  }, [])\n\n  const customRef = React.useCallback(\n    (node: T | null) => {\n      if (previousNode.current?.nodeType === Node.ELEMENT_NODE) {\n        previousNode.current.removeEventListener(\"mouseenter\", handleMouseEnter)\n        previousNode.current.removeEventListener(\"mouseleave\", handleMouseLeave)\n      }\n\n      if (node?.nodeType === Node.ELEMENT_NODE) {\n        node.addEventListener(\"mouseenter\", handleMouseEnter)\n        node.addEventListener(\"mouseleave\", handleMouseLeave)\n      }\n\n      previousNode.current = node\n    },\n    [handleMouseEnter, handleMouseLeave]\n  )\n\n  return [customRef, hovering]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

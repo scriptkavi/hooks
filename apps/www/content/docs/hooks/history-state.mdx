@@ -1,0 +1,136 @@
+---
+title: HistoryState
+description: Add undo / redo functionality
+component: true
+---
+
+## About
+
+The `useHistoryState` hook is beneficial for managing state with undo and redo capabilities in React components. It offers functions like undo, redo, set, and clear to interact with the state, along with values like canUndo and canRedo to reflect the state’s status.
+
+## Parameters
+
+| Name           | Type   | Description                                        |
+| -------------- | ------ | -------------------------------------------------- |
+| initialPresent | object | (Optional) The initial state value. Default: `{}`. |
+
+## Return Values
+
+| Name    | Type     | Description                                                |
+| ------- | -------- | ---------------------------------------------------------- |
+| state   | any      | The current state value.                                   |
+| set     | function | A function to set the state value.                         |
+| undo    | function | A function to undo the previous state.                     |
+| redo    | function | A function to redo the next state.                         |
+| clear   | function | A function to clear the state history and reset the state. |
+| canUndo | boolean  | Indicates whether an undo action is available.             |
+| canRedo | boolean  | Indicates whether a redo action is available.              |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add history-state
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="history-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useHistoryState } from "@/hooks/history-state"
+```
+
+```tsx
+import * as React from "react"
+
+import Form from "./Form"
+
+export default function App() {
+  const { state, set, undo, redo, clear, canUndo, canRedo } = useHistoryState({
+    items: [],
+  })
+
+  const addTodo = (val) => {
+    set({
+      ...state,
+      items: state.items.concat({ id: crypto.randomUUID(), name: val }),
+    })
+  }
+
+  const removeTodo = (id) => {
+    set({
+      ...state,
+      items: state.items.filter((item) => item.id !== id),
+    })
+  }
+
+  return (
+    <section>
+      <header>
+        <h1>useHistoryState</h1>
+        <div>
+          <button disabled={!canUndo} className="link" onClick={undo}>
+            Undo
+          </button>
+          <button disabled={!canRedo} className="link" onClick={redo}>
+            Redo
+          </button>
+
+          <button
+            disabled={!state.items.length}
+            className="link"
+            onClick={clear}
+          >
+            Clear
+          </button>
+        </div>
+        <Form addItem={addTodo} />
+      </header>
+
+      <ul>
+        {state.items.map((item, index) => {
+          return (
+            <li key={index}>
+              <span>{item.name}</span>
+              <button className="link" onClick={() => removeTodo(item.id)}>
+                Delete
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  )
+}
+```

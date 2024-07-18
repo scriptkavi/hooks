@@ -1,0 +1,119 @@
+---
+title: Intersection Observer
+description: Track and manage the visibility of your DOM elements within the viewport
+component: true
+---
+
+## About
+
+The `useIntersectionObserver` hook leverages the Intersection Observer API to track the visibility and position of a DOM element relative to the viewport. This hook is ideal for optimizing performance and providing real-time updates for tasks like lazy-loading and infinite scrolling, with customizable thresholds and root margins for precise control.
+
+## Parameters
+
+| Name       | Type    | Default | Description                                                                                                                                                                                                                                                |
+| ---------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| threshold  | number  | 1       | Either a single number or an array of numbers between 0 and 1, indicating at what percentage of the target’s visibility the observer’s callback should be executed.                                                                                        |
+| root       | element | null    | The Element that is used as the viewport for checking visibility of the target. Defaults to the browser viewport if not specified or if null.                                                                                                              |
+| rootMargin | string  | "0%"    | Margin around the root. Can have values similar to the CSS margin property. The values can be percentages. This set of values serves to grow or shrink each side of the root element’s bounding box before computing intersections. Defaults to all zeros. |
+
+## Return Values
+
+| Name  | Type             | Description                                                                                                     |
+| ----- | ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| ref   | React ref object | A React reference that can be attached to a DOM element to observe.                                             |
+| entry | object           | An object containing information about the intersection. This object is similar to `IntersectionObserverEntry`. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add intersection-observer
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="intersection-observer" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useIntersectionObserver } from "@/hooks/intersection-observer"
+```
+
+```tsx
+import * as React from "react"
+
+import demoData from "./demoData"
+
+const Section = ({ imgUrl, caption, href }) => {
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: "0px",
+  })
+
+  return (
+    <section>
+      <figure ref={ref}>
+        {entry?.isIntersecting && (
+          <>
+            <img src={imgUrl} alt={caption} />
+            <figcaption>
+              <a href={href} alt={caption} target="_blank" rel="noreferrer">
+                {caption}
+              </a>
+            </figcaption>
+          </>
+        )}
+      </figure>
+    </section>
+  )
+}
+
+export default function App() {
+  return (
+    <main>
+      <header>
+        <h1>useIntersectionObserver</h1>
+        <h6>
+          (Memes from <a href="https://bytes.dev">bytes.dev</a>)
+        </h6>
+      </header>
+
+      {demoData.map(({ imgUrl, href, caption }, index) => {
+        return (
+          <Section key={index} imgUrl={imgUrl} href={href} caption={caption} />
+        )
+      })}
+    </main>
+  )
+}
+```

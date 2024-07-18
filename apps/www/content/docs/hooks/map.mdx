@@ -1,0 +1,115 @@
+---
+title: Map
+description: Synchronize and update state based on the Map data structure
+component: true
+---
+
+## About
+
+The `useMap` hook provides a wrapper around the JavaScript Map object, allowing easy updates and synchronization of the map state with the component’s rendering. By using this hook, you can add, delete, or clear entries in the map, ensuring the component re-renders whenever these operations are performed.
+
+## Return Values
+
+| Name | Type       | Description                                            |
+| ---- | ---------- | ------------------------------------------------------ |
+| map  | map object | An instance of the `Map` object with enhanced methods. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add map
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="map" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useMap } from "@/hooks/map"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const map = useMap([
+    ["Jazz", 32],
+    ["Suns", 50],
+  ])
+
+  return (
+    <section>
+      <h1>useMap</h1>
+      <table>
+        <thead>
+          <tr>
+            <th colSpan={4}>Jazz vs Suns</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from(map.keys()).map((team) => {
+            const score = map.get(team)
+            return (
+              <tr key={team}>
+                <th style={{ width: "25%" }}>{team}</th>
+                <td style={{ width: "50%" }}>{score}</td>
+                <td style={{ width: "12.5%" }}>
+                  <button
+                    className="link"
+                    onClick={() => {
+                      map.set(team, score + 2)
+                    }}
+                  >
+                    + 2
+                  </button>
+                </td>
+                <td style={{ width: "12.5%" }}>
+                  <button
+                    className="link"
+                    onClick={() => {
+                      map.set(team, score + 3)
+                    }}
+                  >
+                    + 3
+                  </button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```

@@ -1,0 +1,11 @@
+{
+  "name": "visibility-change",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "visibility-change.ts",
+      "content": "import * as React from \"react\"\n\nconst useVisibilityChangeSubscribe = (callback: () => void): (() => void) => {\n  document.addEventListener(\"visibilitychange\", callback)\n\n  return () => {\n    document.removeEventListener(\"visibilitychange\", callback)\n  }\n}\n\nconst getVisibilityChangeSnapshot = (): DocumentVisibilityState => {\n  return document.visibilityState\n}\n\nconst getVisibilityChangeServerSnapshot = (): never => {\n  throw Error(\"useVisibilityChange is a client-only hook\")\n}\n\nexport function useVisibilityChange(): boolean {\n  const visibilityState = React.useSyncExternalStore(\n    useVisibilityChangeSubscribe,\n    getVisibilityChangeSnapshot,\n    getVisibilityChangeServerSnapshot\n  )\n\n  return visibilityState === \"visible\"\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

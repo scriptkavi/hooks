@@ -1,0 +1,97 @@
+---
+title: Debounce
+description: Delay the execution of function or state update.
+component: true
+---
+
+## About
+
+The `useDebounce` hook helps delay the execution of functions or state updates until a specified time period has passed without any further input changes. This is particularly useful for managing user input or initiating network requests, as it minimizes unnecessary computations and ensures that resource-heavy tasks only run after the input activity has paused.
+
+## Parameters
+
+| Name  | Type   | Description                                                                          |
+| ----- | ------ | ------------------------------------------------------------------------------------ |
+| value | any    | The value that you want to debounce. This can be of any type.                        |
+| delay | number | The delay time in milliseconds. After this amount of time, the latest value is used. |
+
+## Return Values
+
+| Name           | Type | Description                                                                                                                    |
+| -------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------ |
+| debouncedValue | any  | The debounced value. After the delay time has passed without the `value` changing, this will be updated to the latest `value`. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add debounce
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="debounce" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useDebounce } from "@/hooks/debounce"
+```
+
+```tsx
+export default function App() {
+  const [searchTerm, setSearchTerm] = React.useState("js")
+  const debouncedSearchTerm = useDebounce(searchTerm, 300)
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  React.useEffect(() => {
+    const callApi = async () => {
+      if (debouncedSearchTerm) {
+        // Call Api
+      }
+    }
+    callApi()
+  }, [debouncedSearchTerm])
+
+  return (
+    <form>
+      <input
+        name="search"
+        placeholder="Search something..."
+        onChange={handleChange}
+      />
+    </form>
+  )
+}
+```

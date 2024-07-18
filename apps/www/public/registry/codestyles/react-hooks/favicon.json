@@ -1,0 +1,11 @@
+{
+  "name": "favicon",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "favicon.ts",
+      "content": "import * as React from \"react\"\n\nexport function useFavicon(url: string): void {\n  React.useEffect(() => {\n    let link = document.querySelector<HTMLLinkElement>(`link[rel~=\"icon\"]`)\n\n    if (!link) {\n      link = document.createElement(\"link\")\n      link.type = \"image/x-icon\"\n      link.rel = \"icon\"\n      link.href = url\n      document.head.appendChild(link)\n    } else {\n      link.href = url\n    }\n  }, [url])\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "media-query",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "media-query.ts",
+      "content": "import * as React from \"react\"\n\nexport function useMediaQuery(query: string): boolean {\n  const subscribe = React.useCallback(\n    (callback: () => void) => {\n      const matchMedia = window.matchMedia(query)\n\n      matchMedia.addEventListener(\"change\", callback)\n      return () => {\n        matchMedia.removeEventListener(\"change\", callback)\n      }\n    },\n    [query]\n  )\n\n  const getSnapshot = () => {\n    return window.matchMedia(query).matches\n  }\n\n  const getServerSnapshot = () => {\n    throw Error(\"useMediaQuery is a client-only hook\")\n  }\n\n  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

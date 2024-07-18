@@ -1,0 +1,11 @@
+{
+  "name": "default",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "default.ts",
+      "content": "import * as React from \"react\"\n\nexport function useDefault<T>(\n  initialValue: T | undefined,\n  defaultValue: T\n): [T, React.Dispatch<React.SetStateAction<T | undefined>>] {\n  const [state, setState] = React.useState<T | undefined>(initialValue)\n\n  if (state === undefined || state === null) {\n    return [defaultValue, setState]\n  }\n\n  return [state, setState]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

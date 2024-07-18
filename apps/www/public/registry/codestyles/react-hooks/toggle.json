@@ -1,0 +1,11 @@
+{
+  "name": "toggle",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "toggle.ts",
+      "content": "import * as React from \"react\"\n\nexport function useToggle(\n  initialValue: boolean\n): [boolean, (value?: boolean) => void] {\n  const [on, setOn] = React.useState(initialValue)\n\n  const handleToggle = React.useCallback((value?: boolean) => {\n    if (typeof value === \"boolean\") {\n      return setOn(value)\n    }\n\n    return setOn((v) => !v)\n  }, [])\n\n  return [on, handleToggle]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,118 @@
+---
+title: Session Storage
+description: Store, retrieve, and synchronize data from the browser’s session storage
+component: true
+---
+
+## About
+
+The `useSessionStorage` hook stores and retrieves data in the browser’s session storage, providing a way to persist data across multiple page views or browser refreshes. It uses the window.sessionStorage API to synchronize stored data with the component’s local state and listens for changes in session storage to update the local state accordingly.
+
+## Parameters
+
+| Name         | Type   | Description                                                                                |
+| ------------ | ------ | ------------------------------------------------------------------------------------------ |
+| key          | string | The key used to access the session storage value.                                          |
+| initialValue | any    | The initial value to use if there is no item in the session storage with the provided key. |
+
+## Return Values
+
+| Name           | Type     | Description                                                                                                                                                                                                       |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| localState     | any      | The current state of the value stored in session storage.                                                                                                                                                         |
+| handleSetState | function | A function to set the state of the value in the session storage. This function accepts a new value or a function that returns a new value. The value is also saved in the session storage under the provided key. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add session-storage
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="session-storage" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useSessionStorage } from "@/hooks/session-storage"
+```
+
+```tsx
+import * as React from "react"
+
+import { cart } from "./icons"
+
+export default function App() {
+  const [count, setCount] = useSessionStorage("woot", 0)
+
+  return (
+    <section>
+      <h1>useSessionStorage</h1>
+      <div>
+        <button className="link" onClick={() => setCount(0)}>
+          Clear Cart
+        </button>
+        <button
+          className="link"
+          onClick={() => {
+            window.location.reload()
+          }}
+        >
+          Reload Window
+        </button>
+        <button
+          className="link"
+          onClick={() => {
+            window.sessionStorage.clear()
+            window.location.reload()
+          }}
+        >
+          Clear Session
+        </button>
+      </div>
+      <button className="primary" onClick={() => setCount(count + 1)}>
+        <span>{cart}</span> Add To Cart
+      </button>
+      <button className="cart">
+        <span>{cart}</span>{" "}
+        <span
+          key={count}
+          className={`cart-count ${count > 0 ? "animate" : ""}`}
+        >
+          {count}
+        </span>
+      </button>
+    </section>
+  )
+}
+```

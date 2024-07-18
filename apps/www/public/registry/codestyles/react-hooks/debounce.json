@@ -1,0 +1,11 @@
+{
+  "name": "debounce",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "debounce.ts",
+      "content": "import React from \"react\"\n\nexport function useDebounce(value: any, delay: number) {\n  const [debouncedValue, setDebouncedValue] = React.useState(value)\n\n  React.useEffect(() => {\n    const handler = setTimeout(() => {\n      setDebouncedValue(value)\n    }, delay)\n\n    return () => {\n      clearTimeout(handler)\n    }\n  }, [value, delay])\n\n  return debouncedValue\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

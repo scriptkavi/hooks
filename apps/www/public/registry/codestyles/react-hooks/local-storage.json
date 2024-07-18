@@ -1,0 +1,11 @@
+{
+  "name": "local-storage",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "local-storage.ts",
+      "content": "import * as React from \"react\"\n\nfunction dispatchStorageEvent(key: string, newValue: string | null) {\n  window.dispatchEvent(new StorageEvent(\"storage\", { key, newValue }))\n}\n\nconst setLocalStorageItem = (key: string, value: unknown) => {\n  const stringifiedValue = JSON.stringify(value)\n  window.localStorage.setItem(key, stringifiedValue)\n  dispatchStorageEvent(key, stringifiedValue)\n}\n\nconst removeLocalStorageItem = (key: string) => {\n  window.localStorage.removeItem(key)\n  dispatchStorageEvent(key, null)\n}\n\nconst getLocalStorageItem = (key: string): string | null => {\n  return window.localStorage.getItem(key)\n}\n\nconst useLocalStorageSubscribe = (callback: (event: StorageEvent) => void) => {\n  window.addEventListener(\"storage\", callback)\n  return () => window.removeEventListener(\"storage\", callback)\n}\n\nconst getLocalStorageServerSnapshot = () => {\n  throw Error(\"useLocalStorage is a client-only hook\")\n}\n\nexport function useLocalStorage<T>(\n  key: string,\n  initialValue: T\n): [T, (v: T | ((prevValue: T) => T)) => void] {\n  const getSnapshot = () => getLocalStorageItem(key)\n\n  const store = React.useSyncExternalStore(\n    useLocalStorageSubscribe,\n    getSnapshot,\n    getLocalStorageServerSnapshot\n  )\n\n  const setState = React.useCallback(\n    (v: T | ((prevValue: T) => T)) => {\n      try {\n        const nextState =\n          typeof v === \"function\"\n            ? (v as (prevValue: T) => T)(\n                store ? JSON.parse(store) : initialValue\n              )\n            : v\n\n        if (nextState === undefined || nextState === null) {\n          removeLocalStorageItem(key)\n        } else {\n          setLocalStorageItem(key, nextState)\n        }\n      } catch (e) {\n        console.warn(e)\n      }\n    },\n    [key, store, initialValue]\n  )\n\n  React.useEffect(() => {\n    if (\n      getLocalStorageItem(key) === null &&\n      typeof initialValue !== \"undefined\"\n    ) {\n      setLocalStorageItem(key, initialValue)\n    }\n  }, [key, initialValue])\n\n  return [store ? (JSON.parse(store) as T) : initialValue, setState]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,107 @@
+---
+title: Measure
+description: Effortlessly measure and track your component’s dimensions
+component: true
+---
+
+## About
+
+The `useMeasure` hook monitors and responds to changes in the size of a React component. It uses the ResizeObserver API to track changes in the component’s dimensions (width and height) and keeps them available as state. The returned ref is used on the element whose dimensions you want to measure, making it valuable for responsive design and dynamic layout adjustments.
+
+## Return Values
+
+| Name | Type             | Description                                                         |
+| ---- | ---------------- | ------------------------------------------------------------------- |
+| ref  | React ref object | A React reference that can be attached to a DOM element to observe. |
+| rect | object           | An object containing the width and height of the observed element.  |
+
+## Rect Object Properties
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| width    | number | Width of the observed element.  |
+| height   | number | Height of the observed element. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add measure
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="measure" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useMeasure } from "@/hooks/measure"
+```
+
+```tsx
+import * as React from "react"
+
+function Measure({ type = "horizontal" }) {
+  const [ref, { width, height }] = useMeasure()
+
+  return (
+    <figure>
+      <figcaption>
+        <span>{type}</span>
+      </figcaption>
+      <article
+        ref={ref}
+        className={type}
+        style={{
+          resize: type,
+        }}
+      >
+        {type === "horizontal" ? (
+          <label>width: {Math.floor(width)}</label>
+        ) : (
+          <label>height: {Math.floor(height)}</label>
+        )}
+      </article>
+    </figure>
+  )
+}
+
+export default function App() {
+  return (
+    <section>
+      <h1>useMeasure</h1>
+      <p>(Resize the rulers)</p>
+      <Measure />
+    </section>
+  )
+}
+```

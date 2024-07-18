@@ -1,0 +1,11 @@
+{
+  "name": "session-storage",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "session-storage.ts",
+      "content": "import * as React from \"react\"\n\nfunction dispatchStorageEvent(key: string, newValue: string | null) {\n  window.dispatchEvent(new StorageEvent(\"storage\", { key, newValue }))\n}\n\nconst setSessionStorageItem = (key: string, value: any) => {\n  const stringifiedValue = JSON.stringify(value)\n  window.sessionStorage.setItem(key, stringifiedValue)\n  dispatchStorageEvent(key, stringifiedValue)\n}\n\nconst removeSessionStorageItem = (key: string) => {\n  window.sessionStorage.removeItem(key)\n  dispatchStorageEvent(key, null)\n}\n\nconst getSessionStorageItem = (key: string): string | null => {\n  return window.sessionStorage.getItem(key)\n}\n\nconst useSessionStorageSubscribe = (\n  callback: (event: StorageEvent) => void\n): (() => void) => {\n  window.addEventListener(\"storage\", callback)\n  return () => window.removeEventListener(\"storage\", callback)\n}\n\nconst getSessionStorageServerSnapshot = (): never => {\n  throw Error(\"useSessionStorage is a client-only hook\")\n}\n\nexport function useSessionStorage<T>(\n  key: string,\n  initialValue: T\n): [T, (value: T | ((prevValue: T) => T)) => void] {\n  const getSnapshot = () => getSessionStorageItem(key)\n\n  const store = React.useSyncExternalStore(\n    useSessionStorageSubscribe,\n    getSnapshot,\n    getSessionStorageServerSnapshot\n  )\n\n  const setState = React.useCallback(\n    (v: T | ((prevValue: T) => T)) => {\n      try {\n        const nextState =\n          typeof v === \"function\"\n            ? (v as (prevValue: T) => T)(\n                store ? JSON.parse(store) : initialValue\n              )\n            : v\n\n        if (nextState === undefined || nextState === null) {\n          removeSessionStorageItem(key)\n        } else {\n          setSessionStorageItem(key, nextState)\n        }\n      } catch (e) {\n        console.warn(e)\n      }\n    },\n    [key, store, initialValue]\n  )\n\n  React.useEffect(() => {\n    if (\n      getSessionStorageItem(key) === null &&\n      typeof initialValue !== \"undefined\"\n    ) {\n      setSessionStorageItem(key, initialValue)\n    }\n  }, [key, initialValue])\n\n  return [store ? (JSON.parse(store) as T) : initialValue, setState]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

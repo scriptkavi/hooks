@@ -1,0 +1,11 @@
+{
+  "name": "script",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "script.ts",
+      "content": "import * as React from \"react\"\n\ninterface UseScriptOptions {\n  removeOnUnmount?: boolean\n}\n\nexport function useScript(src: string, options: UseScriptOptions = {}): string {\n  const [status, setStatus] = React.useState(\"loading\")\n  const optionsRef = React.useRef(options)\n\n  React.useEffect(() => {\n    let script = document.querySelector<HTMLScriptElement>(\n      `script[src=\"${src}\"]`\n    )\n\n    const domStatus = script?.getAttribute(\"data-status\")\n    if (domStatus) {\n      setStatus(domStatus)\n      return\n    }\n\n    if (script === null) {\n      script = document.createElement(\"script\")\n      script.src = src\n      script.async = true\n      script.setAttribute(\"data-status\", \"loading\")\n      document.body.appendChild(script)\n\n      const handleScriptLoad = () => {\n        script!.setAttribute(\"data-status\", \"ready\")\n        setStatus(\"ready\")\n        removeEventListeners()\n      }\n\n      const handleScriptError = () => {\n        script!.setAttribute(\"data-status\", \"error\")\n        setStatus(\"error\")\n        removeEventListeners()\n      }\n\n      const removeEventListeners = () => {\n        script!.removeEventListener(\"load\", handleScriptLoad)\n        script!.removeEventListener(\"error\", handleScriptError)\n      }\n\n      script.addEventListener(\"load\", handleScriptLoad)\n      script.addEventListener(\"error\", handleScriptError)\n\n      const removeOnUnmount = optionsRef.current.removeOnUnmount\n\n      return () => {\n        if (removeOnUnmount === true) {\n          script!.remove()\n          removeEventListeners()\n        }\n      }\n    } else {\n      setStatus(\"unknown\")\n    }\n  }, [src])\n\n  return status\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

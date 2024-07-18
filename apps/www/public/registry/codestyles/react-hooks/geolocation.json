@@ -1,0 +1,11 @@
+{
+  "name": "geolocation",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "geolocation.ts",
+      "content": "import * as React from \"react\"\n\ninterface GeolocationOptions {\n  enableHighAccuracy?: boolean\n  timeout?: number\n  maximumAge?: number\n}\n\ninterface GeolocationState {\n  loading: boolean\n  accuracy: number | null\n  altitude: number | null\n  altitudeAccuracy: number | null\n  heading: number | null\n  latitude: number | null\n  longitude: number | null\n  speed: number | null\n  timestamp: number | null\n  error: GeolocationPositionError | null\n}\n\nexport function useGeolocation(\n  options: GeolocationOptions = {}\n): GeolocationState {\n  const [state, setState] = React.useState<GeolocationState>({\n    loading: true,\n    accuracy: null,\n    altitude: null,\n    altitudeAccuracy: null,\n    heading: null,\n    latitude: null,\n    longitude: null,\n    speed: null,\n    timestamp: null,\n    error: null,\n  })\n\n  const optionsRef = React.useRef(options)\n\n  React.useEffect(() => {\n    const onEvent = ({ coords, timestamp }: GeolocationPosition) => {\n      setState({\n        loading: false,\n        timestamp,\n        latitude: coords.latitude,\n        longitude: coords.longitude,\n        altitude: coords.altitude,\n        accuracy: coords.accuracy,\n        altitudeAccuracy: coords.altitudeAccuracy,\n        heading: coords.heading,\n        speed: coords.speed,\n        error: null,\n      })\n    }\n\n    const onEventError = (error: GeolocationPositionError) => {\n      setState((s) => ({\n        ...s,\n        loading: false,\n        error,\n      }))\n    }\n\n    navigator.geolocation.getCurrentPosition(\n      onEvent,\n      onEventError,\n      optionsRef.current\n    )\n\n    const watchId = navigator.geolocation.watchPosition(\n      onEvent,\n      onEventError,\n      optionsRef.current\n    )\n\n    return () => {\n      navigator.geolocation.clearWatch(watchId)\n    }\n  }, [])\n\n  return state\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

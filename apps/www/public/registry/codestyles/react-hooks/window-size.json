@@ -1,0 +1,11 @@
+{
+  "name": "window-size",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "window-size.ts",
+      "content": "import * as React from \"react\"\n\ninterface WindowSize {\n  width: number | null\n  height: number | null\n}\n\nexport function useWindowSize(): WindowSize {\n  const [size, setSize] = React.useState<WindowSize>({\n    width: null,\n    height: null,\n  })\n\n  React.useLayoutEffect(() => {\n    const handleResize = () => {\n      setSize({\n        width: window.innerWidth,\n        height: window.innerHeight,\n      })\n    }\n\n    handleResize()\n    window.addEventListener(\"resize\", handleResize)\n\n    return () => {\n      window.removeEventListener(\"resize\", handleResize)\n    }\n  }, [])\n\n  return size\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

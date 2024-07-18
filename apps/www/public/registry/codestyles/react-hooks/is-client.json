@@ -1,0 +1,11 @@
+{
+  "name": "is-client",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "is-client.ts",
+      "content": "import * as React from \"react\"\n\nexport function useIsClient(): boolean {\n  const [isClient, setIsClient] = React.useState(false)\n\n  React.useEffect(() => {\n    setIsClient(true)\n  }, [])\n\n  return isClient\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

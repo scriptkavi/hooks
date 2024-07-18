@@ -1,0 +1,11 @@
+{
+  "name": "object-state",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "object-state.ts",
+      "content": "import * as React from \"react\"\n\nfunction isPlainObject(value: any): value is Record<string, any> {\n  return Object.prototype.toString.call(value) === \"[object Object]\"\n}\n\nexport function useObjectState<T extends Record<string, any>>(\n  initialValue: T\n): [T, (arg: Partial<T> | ((state: T) => Partial<T>)) => void] {\n  const [state, setState] = React.useState<T>(initialValue)\n\n  const handleUpdate = React.useCallback(\n    (arg: Partial<T> | ((state: T) => Partial<T>)) => {\n      if (typeof arg === \"function\") {\n        setState((s) => {\n          const newState = arg(s)\n\n          if (isPlainObject(newState)) {\n            return {\n              ...s,\n              ...newState,\n            }\n          }\n          return s\n        })\n      } else if (isPlainObject(arg)) {\n        setState((s) => ({\n          ...s,\n          ...arg,\n        }))\n      }\n    },\n    []\n  )\n\n  return [state, handleUpdate]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,93 @@
+---
+title: Throttle
+description: Throttle computationally expensive operations
+component: true
+---
+
+## About
+
+The `useThrottle` hook controls execution frequency in a React application. By accepting a value and an optional interval, it ensures the value is updated at most every specified interval milliseconds. This is useful for limiting API calls, reducing UI updates, or mitigating performance issues by throttling expensive operations.
+
+## Parameters
+
+| Name     | Type   | Description                                              |
+| -------- | ------ | -------------------------------------------------------- |
+| value    | any    | The value to throttle.                                   |
+| interval | number | (Optional) The interval in milliseconds. Default: 500ms. |
+
+## Return Values
+
+| Name           | Type | Description                                                    |
+| -------------- | ---- | -------------------------------------------------------------- |
+| throttledValue | any  | The throttled value that is updated at most once per interval. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add throttle
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="throttle" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useThrottle } from "@/hooks/throttle"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const [val, setVal] = React.useState("")
+  const throttledValue = useThrottle(val)
+
+  return (
+    <section>
+      <h1>useThrottle</h1>
+      <input
+        placeholder="Type some text"
+        style={{ background: "var(--charcoal)" }}
+        type="text"
+        value={val}
+        onChange={(e) => {
+          setVal(e.target.value)
+        }}
+      />
+      <p>Val: {val}</p>
+      <p>Throttled: {throttledValue}</p>
+    </section>
+  )
+}
+```

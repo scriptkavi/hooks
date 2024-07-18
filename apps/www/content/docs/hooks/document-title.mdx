@@ -1,0 +1,88 @@
+---
+title: Document Title
+description: Manage state with default values.
+component: true
+---
+
+## About
+
+The `useDocumentTitle` hook is handy for dynamically updating a webpage's title based on the current state or data. This is particularly useful in scenarios where the title needs to change in real-time, such as showing the name of a currently selected item or reflecting changes in the application state.
+
+## Parameters
+
+| Name  | Type   | Description                           |
+| ----- | ------ | ------------------------------------- |
+| title | string | The title to be set for the document. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add document-title
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="document-title" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useDocumentTitle } from "@/hooks/document-title"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const [count, setCount] = React.useState(0)
+
+  useDocumentTitle(`Clicked ${count} times.`)
+  return (
+    <section>
+      <h1>useDocumentTitle</h1>
+      <h6>
+        <a
+          className="link"
+          href="https://6vmc1n.csb.app/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Try in a new tab
+        </a>
+      </h6>
+      <button className="primary" onClick={() => setCount(count + 1)}>
+        Increment Count: {count}
+      </button>
+    </section>
+  )
+}
+```

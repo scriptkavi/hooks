@@ -1,0 +1,31 @@
+---
+title: Manual Installation
+description: Add dependencies to your project manually.
+---
+
+<Steps>
+
+### Configure path aliases
+
+I use the `@` alias. This is how I configure it in tsconfig.json:
+
+```json {3-6} title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+The `@` alias is a preference. You can use other aliases if you want.
+
+**If you use a different alias such as ~, you'll need to update import statements when adding hooks.**
+
+### That's it
+
+You can now start adding hooks to your project.
+
+</Steps>

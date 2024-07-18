@@ -1,0 +1,11 @@
+{
+  "name": "copy-to-clipboard",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "copy-to-clipboard.ts",
+      "content": "import { useCallback, useState } from \"react\"\n\nfunction oldSchoolCopy(value: string) {\n  const textArea = document.createElement(\"textarea\")\n  textArea.value = value\n  document.body.appendChild(textArea)\n  textArea.select()\n  document.execCommand(\"copy\")\n  document.body.removeChild(textArea)\n}\n\nexport function useCopyToClipboard(): [string | null, (value: string) => void] {\n  const [state, setState] = useState<string | null>(null)\n\n  const copyToClipboard = useCallback((value: string) => {\n    const handleCopy = async () => {\n      try {\n        if (navigator?.clipboard?.writeText) {\n          await navigator.clipboard.writeText(value)\n          setState(value)\n        } else {\n          throw new Error(\"writeText not supported\")\n        }\n      } catch (e) {\n        oldSchoolCopy(value)\n        setState(value)\n      }\n    }\n\n    handleCopy()\n  }, [])\n\n  return [state, copyToClipboard]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,117 @@
+---
+title: CLI
+description: Use the CLI to add components to your project.
+---
+
+## init
+
+Use the `init` command to initialize configuration and dependencies for a new project.
+
+The `init` command configures the project.
+
+```bash
+npx scriptkavi-hooks@latest init
+```
+
+You will be asked a few questions to configure `hooks.json`:
+
+```txt showLineNumbers
+Would you like to use TypeScript (recommended)? no/yes
+Which codestyle would you like to use? › React Hooks
+Configure the import alias for hooks: › @/hooks
+Configure the import alias for utils: › @/lib/utils
+```
+
+### Options
+
+```txt
+Usage: scriptkavi-hooks init [options]
+
+initialize your project and install dependencies
+
+Options:
+  -y, --yes        skip confirmation prompt. (default: false)
+  -c, --cwd <cwd>  the working directory. defaults to the current directory.
+  -h, --help       display help for command
+```
+
+## add
+
+Use the `add` command to add hooks and dependencies to your project.
+
+```bash
+npx scriptkavi-hooks@latest add [hook]
+```
+
+You will be presented with a list of hooks to choose from:
+
+```txt
+Which hooks would you like to add? › Space to select. A to toggle all.
+Enter to submit.
+
+◯  battery
+◯  click-away
+◯  copy-to-clipboard
+◯  counter
+◯  debounce
+```
+
+### Options
+
+```txt
+Usage: scriptkavi-hooks add [options] [hooks...]
+
+add a hook to your project
+
+Arguments:
+  hooks         the hooks to add
+
+Options:
+  -y, --yes          skip confirmation prompt. (default: false)
+  -o, --overwrite    overwrite existing files. (default: false)
+  -c, --cwd <cwd>    the working directory. defaults to the current directory.
+  -p, --path <path>  the path to add the hook to.
+  -h, --help         display help for command
+```
+
+## diff (experimental)
+
+You can use the diff command to check for updates against the registry.
+
+Run the following command to get a list of hooks that have updates available:
+
+```bash
+npx scriptkavi-hooks diff
+```
+
+```txt
+The following hooks have updates available:
+- battery
+  - /path/to/my-app/hooks/battery.ts
+- click-away
+  - /path/to/my-app/hooks/click-away.ts
+- debounce
+  - /path/to/my-app/hooks/debounce.ts
+```
+
+Then run `diff [hook]` to see the changes:
+
+```bash
+npx scriptkavi-hooks diff debounce
+```
+
+### Options
+
+```txt
+Usage: scriptkavi-hooks diff [options] [hook]
+
+check for updates against the registry
+
+Arguments:
+  hook        the hook name
+
+Options:
+  -y, --yes        skip confirmation prompt. (default: false)
+  -c, --cwd <cwd>  the working directory. defaults to the current directory.
+  -h, --help       display help for command
+```

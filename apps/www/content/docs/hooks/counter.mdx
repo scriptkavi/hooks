@@ -1,0 +1,104 @@
+---
+title: Counter
+description: Manage a counter value with minimum and maximum limits.
+component: true
+---
+
+## About
+
+The `useCounter` hook is helpful for managing a counter value, offering extra options for setting minimum and maximum limits. It accepts a starting value and an options object that can define these limits. If the starting value is outside the defined limits, an error is thrown. The hook provides the current count value and an object with functions to increment, decrement, set a specific count, and reset the counter.
+
+## Parameters
+
+| Name          | Type   | Description                                        |
+| ------------- | ------ | -------------------------------------------------- |
+| startingValue | number | The initial value for the counter. Default is `0`. |
+| options       | object | Additional options for the counter.                |
+| options.min   | number | The minimum value allowed for the counter.         |
+| options.max   | number | The maximum value allowed for the counter.         |
+
+## Return Values
+
+| Name            | Parameters        | Description                                          |
+| --------------- | ----------------- | ---------------------------------------------------- |
+| `[0]`           |                   | The current value of the counter.                    |
+| `[1].increment` |                   | Increments the counter by 1.                         |
+| `[1].decrement` |                   | Decrements the counter by 1.                         |
+| `[1].set`       | nextCount: number | Sets the counter to the specified `nextCount` value. |
+| `[1].reset`     |                   | Resets the counter to the initial `startingValue`.   |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add counter
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="counter" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useCounter } from "@/hooks/counter"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const [count, { increment, decrement, set, reset }] = useCounter(5, {
+    min: 5,
+    max: 10,
+  })
+
+  return (
+    <section>
+      <h1>UseCounter</h1>
+      <h6>with optional min / max</h6>
+      <button disabled={count >= 10} className="link" onClick={increment}>
+        Increment
+      </button>
+      <button disabled={count <= 5} className="link" onClick={decrement}>
+        Decrement
+      </button>
+      <button className="link" onClick={() => set(6)}>
+        Set to 6
+      </button>
+      <button className="link" onClick={reset}>
+        Reset
+      </button>
+      <p>{count}</p>
+    </section>
+  )
+}
+```

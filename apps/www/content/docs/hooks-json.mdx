@@ -1,0 +1,89 @@
+---
+title: hooks.json
+description: Configuration for your project.
+---
+
+The `hooks.json` file holds configuration for your project.
+
+We use it to understand how your project is set up and how to generate components customized for your project.
+
+<Callout className="mt-6">
+  Note: The `hooks.json` file is optional and **only required if you're using
+  the CLI** to add components to your project. If you're using the copy and
+  paste method, you don't need this file.
+</Callout>
+
+You can create a `hooks.json` file in your project by running the following command:
+
+```bash
+npx scriptkavi-hooks@latest init
+```
+
+See the <Link href="/docs/cli">CLI section</Link> for more information.
+
+## $schema
+
+You can see the JSON Schema for `hooks.json` [here](https://hooks.scriptkavi.com/schema.json).
+
+```json title="hooks.json"
+{
+  "$schema": "https://hooks.scriptkavi.com/schema.json"
+}
+```
+
+## codestyle
+
+The coding style for your hooks. This defines whether your hooks are react based or pure javascript. **This cannot be changed after initialization.**
+
+```json title="hooks.json"
+{
+  "codestyle": "react-hook"
+}
+```
+
+## tsx
+
+Choose between TypeScript or JavaScript hooks.
+
+Setting this option to `false` allows hooks to be added as JavaScript with the `.js` file extension.
+
+```json title="hooks.json"
+{
+  "tsx": `true` | `false`
+}
+```
+
+## aliases
+
+The CLI uses these values and the `paths` config from your `tsconfig.json` or `jsconfig.json` file to place generated hooks in the correct location.
+
+Path aliases have to be set up in your `tsconfig.json` or `jsconfig.json` file.
+
+<Callout className="mt-6">
+  **Important:** If you're using the `src` directory, make sure it is included
+  under `paths` in your `tsconfig.json` or `jsconfig.json` file.
+</Callout>
+
+### aliases.utils
+
+Import alias for your utility functions.
+
+```json title="hooks.json"
+{
+  "aliases": {
+    "utils": "@/lib/utils"
+  }
+}
+```
+
+### aliases.hooks
+
+Import alias for your hooks.
+
+```json title="hooks.json"
+{
+  "aliases": {
+    "hooks": "@/hooks"
+  }
+}
+```

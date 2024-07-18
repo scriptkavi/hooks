@@ -1,0 +1,111 @@
+---
+title: Toggle
+description: A hook to toggle a boolean value
+component: true
+---
+
+## About
+
+The `useToggle` hook takes a boolean value (true or false) and toggles it to the opposite value. It’s useful for actions that require toggling between two states, such as showing/hiding a modal, showing more/less text, or opening/closing a side menu.
+
+## Parameters
+
+| Name         | Type    | Description                                       |
+| ------------ | ------- | ------------------------------------------------- |
+| initialValue | boolean | (Optional) The initial value of the toggle state. |
+
+## Return Values
+
+| Index | Type     | Description                                   |
+| ----- | -------- | --------------------------------------------- |
+| 0     | boolean  | The current state of the toggle.              |
+| 1     | function | A function to toggle the state of the toggle. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add toggle
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="toggle" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useToggle } from "@/hooks/toggle"
+```
+
+```tsx
+import * as React from "react"
+
+function ToggleDemo({ on, toggle }) {
+  return (
+    <div>
+      <label className="toggle">
+        <input
+          onChange={toggle}
+          className="toggle-checkbox"
+          type="checkbox"
+          checked={on}
+        />
+        <div className="toggle-switch"></div>
+        <span className="toggle-label">{on ? "On" : "Off"}</span>
+      </label>
+    </div>
+  )
+}
+
+export default function App() {
+  const [on, toggle] = useToggle(true)
+
+  return (
+    <section>
+      <h1>UseToggle</h1>
+      <button disabled={on} className="link" onClick={() => toggle(true)}>
+        Turn On
+      </button>
+      <button disabled={!on} className="link" onClick={() => toggle(false)}>
+        Turn Off
+      </button>
+      <button className="link" onClick={toggle}>
+        Toggle
+      </button>
+      <button className="link" onClick={() => toggle("nope")}>
+        (Also toggles)
+      </button>
+      <ToggleDemo toggle={toggle} on={on} />
+    </section>
+  )
+}
+```

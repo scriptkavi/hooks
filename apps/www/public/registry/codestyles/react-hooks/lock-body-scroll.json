@@ -1,0 +1,11 @@
+{
+  "name": "lock-body-scroll",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "lock-body-scroll.ts",
+      "content": "import * as React from \"react\"\n\nexport function useLockBodyScroll(): void {\n  React.useLayoutEffect(() => {\n    const originalStyle = window.getComputedStyle(document.body).overflow\n    document.body.style.overflow = \"hidden\"\n    return () => {\n      document.body.style.overflow = originalStyle\n    }\n  }, [])\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

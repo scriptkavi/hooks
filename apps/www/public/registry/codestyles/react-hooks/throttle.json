@@ -1,0 +1,11 @@
+{
+  "name": "throttle",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "throttle.ts",
+      "content": "import * as React from \"react\"\n\nexport function useThrottle<T>(value: T, interval = 500): T {\n  const [throttledValue, setThrottledValue] = React.useState(value)\n  const lastUpdated = React.useRef<number | null>(null)\n\n  React.useEffect(() => {\n    const now = Date.now()\n\n    if (lastUpdated.current && now >= lastUpdated.current + interval) {\n      lastUpdated.current = now\n      setThrottledValue(value)\n    } else {\n      const id = window.setTimeout(() => {\n        lastUpdated.current = now\n        setThrottledValue(value)\n      }, interval)\n\n      return () => window.clearTimeout(id)\n    }\n  }, [value, interval])\n\n  return throttledValue\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

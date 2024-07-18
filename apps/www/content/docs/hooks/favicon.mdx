@@ -1,0 +1,107 @@
+---
+title: Favicon
+description: Dynamically update the favicon.
+component: true
+---
+
+## About
+
+The useFavicon hook is useful for dynamically updating the favicon (shortcut icon) of a webpage. By using this hook, you can easily change the favicon by providing a new URL as a parameter. It creates a new link element with the specified URL, sets its type and relationship attributes correctly, and appends it to the `<head>` section of the document.
+
+## Parameters
+
+| Name | Type   | Description                                        |
+| ---- | ------ | -------------------------------------------------- |
+| url  | string | The URL of the favicon to be set for the document. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add favicon
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="favicon" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useFavicon } from "@/hooks/favicon"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const [favicon, setFavicon] = React.useState(
+    "https://hooks.scriptkavi.com/favicon/favicon-32x32.png"
+  )
+
+  useFavicon(favicon)
+
+  return (
+    <section>
+      <h1>useFavicon</h1>
+
+      <button
+        title="Set the favicon to Bytes' logo"
+        className="link"
+        onClick={() =>
+          setFavicon("https://bytes.dev/favicon/favicon-32x32.png")
+        }
+      >
+        Bytes
+      </button>
+      <button
+        title="Set the favicon to React Newsletter's logo"
+        className="link"
+        onClick={() =>
+          setFavicon("https://reactnewsletter.com/favicon/favicon-32x32.png")
+        }
+      >
+        React Newsletter
+      </button>
+
+      <button
+        title="Set the favicon to hooksdotscriptkavi's logo"
+        className="link"
+        onClick={() =>
+          setFavicon("https://hooks.scriptkavi.com/favicon-32x32.png")
+        }
+      >
+        hooks.scriptkavi.com
+      </button>
+    </section>
+  )
+}
+```

@@ -1,0 +1,91 @@
+---
+title: Battery
+description: Track the battery status of a user’s device.
+component: true
+---
+
+## About
+
+The `useBattery` hook is a valuable tool for accessing and tracking the battery status of a user's device within a React application. This hook allows you to conveniently obtain details such as battery level, charging status, and estimated times for charging and discharging. It offers a state object that contains properties like `supported`, `loading`, `level`, `charging`, `chargingTime`, and `dischargingTime`.
+
+## Return Values
+
+| Name            | Type    | Description                                                                                                                                                  |
+| --------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| supported       | boolean | Indicates whether the Battery Status API is supported in the user’s browser.                                                                                 |
+| loading         | boolean | Indicates if the battery information is still loading.                                                                                                       |
+| level           | number  | Represents the level of the system’s battery. 0.0 means that the system’s battery is completely discharged, and 1.0 means the battery is completely charged. |
+| charging        | boolean | Represents whether the system’s battery is charging. `true` means the battery is charging, `false` means it’s not.                                           |
+| chargingTime    | number  | Represents the time remaining in seconds until the system’s battery is fully charged.                                                                        |
+| dischargingTime | number  | Represents the time remaining in seconds until the system’s battery is completely discharged and the system is about to be suspended.                        |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add battery
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="battery" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useBattery } from "@/hooks/battery"
+```
+
+```tsx
+import Battery from "./Battery"
+
+export default function App() {
+  const { loading, level, charging, chargingTime, dischargingTime } =
+    useBattery()
+  return (
+    <>
+      <div className="wrapper">
+        <h1>useBattery</h1>
+        {!loading ? (
+          <Battery
+            level={level * 100}
+            charging={charging}
+            chargingTime={chargingTime}
+            dischargingTime={dischargingTime}
+          />
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </div>
+    </>
+  )
+}
+```

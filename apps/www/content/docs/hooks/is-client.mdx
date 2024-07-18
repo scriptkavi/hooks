@@ -1,0 +1,76 @@
+---
+title: Is Client
+description: Determine whether the code is running on the client-side or server-side
+component: true
+---
+
+## About
+
+The `useIsClient` hook determines if it’s safe to run client-only hooks, like useMediaQuery or useLocalStorage. It returns a boolean indicating whether React’s useEffect hook has completed, confirming the app is being rendered on the client and it’s safe to use browser-specific APIs.
+
+## Return Values
+
+| Name     | Type    | Description                                                        |
+| -------- | ------- | ------------------------------------------------------------------ |
+| isClient | boolean | `true` if running in a client-side environment, `false` otherwise. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add is-client
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="is-client" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useIsClient } from "@/hooks/is-client"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const isClient = useIsClient()
+
+  return (
+    <section>
+      <h1>useIsClient</h1>
+      <h6>Is Client? </h6>
+      <p>{isClient ? "If you can see this ... you already know" : "No"}</p>
+    </section>
+  )
+}
+```

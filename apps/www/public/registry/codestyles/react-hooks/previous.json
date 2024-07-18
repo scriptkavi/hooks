@@ -1,0 +1,11 @@
+{
+  "name": "previous",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "previous.ts",
+      "content": "import * as React from \"react\"\n\nexport function usePrevious<T>(value: T): T | null {\n  const [current, setCurrent] = React.useState<T>(value)\n  const [previous, setPrevious] = React.useState<T | null>(null)\n\n  if (value !== current) {\n    setPrevious(current)\n    setCurrent(value)\n  }\n\n  return previous\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

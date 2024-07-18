@@ -1,0 +1,120 @@
+---
+title: Vite
+description: Install and configure Vite.
+---
+
+<Steps>
+
+### Create project
+
+Start by creating a new React project using `vite`:
+
+```bash
+npm create vite@latest
+```
+
+### Edit tsconfig.json file
+
+Add the following code to the `tsconfig.json` file to resolve paths:
+
+```ts {4-9} showLineNumbers
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+    // ...
+  }
+}
+```
+
+### Update vite.config.ts
+
+Add the following code to the vite.config.ts so your app can resolve paths without error
+
+```bash
+# (so you can import "path" without error)
+npm i -D @types/node
+```
+
+```typescript
+import path from "path"
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+})
+```
+
+### Run the CLI
+
+Run the `scriptkavi-hooks` init command to setup your project:
+
+```bash
+npx scriptkavi-hooks@latest init
+```
+
+### Configure hooks.json
+
+You will be asked a few questions to configure `hooks.json`:
+
+```txt showLineNumbers
+Would you like to use TypeScript (recommended)? no/yes
+Which codestyle would you like to use? › React Hooks
+Configure the import alias for hooks: › @/hooks
+Configure the import alias for utils: › @/lib/utils
+```
+
+### That's it
+
+You can now start adding hooks to your project.
+
+```bash
+npx scriptkavi-hooks@latest add debounce
+```
+
+The command above will add the `Debounce` hook to your project. You can then import it like this:
+
+```tsx {1,6} showLineNumbers
+import { useDebounce } from "@/hooks/debounce"
+
+export default function App() {
+  const [searchTerm, setSearchTerm] = React.useState("js")
+  const debouncedSearchTerm = useDebounce(searchTerm, 300)
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  React.useEffect(() => {
+    const callApi = async () => {
+      if (debouncedSearchTerm) {
+        // Call Api
+      }
+    }
+    callApi()
+  }, [debouncedSearchTerm])
+
+  return (
+    <form>
+      <input
+        name="search"
+        placeholder="Search something..."
+        onChange={handleChange}
+      />
+    </form>
+  )
+}
+```
+
+</Steps>

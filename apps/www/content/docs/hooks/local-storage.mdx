@@ -1,0 +1,107 @@
+---
+title: LocalStorage
+description: Store, retrieve, and synchronize data from the browser’s localStorage API
+component: true
+---
+
+## About
+
+The `useLocalStorage` hook synchronizes the state of a component with data stored in local storage. It reads the initial value from local storage when the component mounts and updates the local storage whenever the state changes. It also listens for changes in local storage made by other tabs or windows, keeping the component’s state up to date.
+
+## Parameters
+
+| Name         | Type   | Description                                                                              |
+| ------------ | ------ | ---------------------------------------------------------------------------------------- |
+| key          | string | The key used to access the local storage value.                                          |
+| initialValue | any    | The initial value to use if there is no item in the local storage with the provided key. |
+
+## Return Values
+
+| Name           | Type     | Description                                                                                                                                                                                                   |
+| -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| localState     | any      | The current state of the value stored in local storage.                                                                                                                                                       |
+| handleSetState | function | A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add local-storage
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="local-storage" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useLocalStorage } from "@/hooks/local-storage"
+```
+
+```tsx
+import * as React from "react"
+
+import createDrawing from "./createDrawing"
+
+export default function App() {
+  const [drawing, saveDrawing] = useLocalStorage("drawing", null)
+  const ref = React.useRef(null)
+  React.useEffect(() => {
+    createDrawing(ref.current, drawing, saveDrawing)
+  }, [drawing, saveDrawing])
+
+  return (
+    <section>
+      <header>
+        <h1>useLocalStorage</h1>
+
+        <button className="link" onClick={() => window.location.reload()}>
+          Reload Window
+        </button>
+        <button
+          className="link"
+          onClick={() => {
+            window.localStorage.clear()
+            window.location.reload()
+          }}
+        >
+          Clear Local Storage
+        </button>
+      </header>
+      <figure>
+        <canvas ref={ref} width={800} height={800} />
+        <figcaption>(draw something)</figcaption>
+      </figure>
+    </section>
+  )
+}
+```

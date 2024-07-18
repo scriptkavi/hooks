@@ -1,0 +1,118 @@
+---
+title: List
+description: Manage and manipulate lists
+component: true
+---
+
+## About
+
+The `useList` hook manages and manipulates lists in a React component. It encapsulates list state and provides convenient methods to modify the list, allowing easy initialization with a default value and offering various methods to add, remove, update, or clear elements within the list.
+
+## Parameters
+
+| Name        | Type  | Description                                              |
+| ----------- | ----- | -------------------------------------------------------- |
+| defaultList | array | The initial list of elements. Default is an empty array. |
+
+## Return Values
+
+| Name           | Parameters                  | Description                                                       |
+| -------------- | --------------------------- | ----------------------------------------------------------------- |
+| `[0]`          |                             | The current list of elements.                                     |
+| `[1].set`      | l: array                    | Replaces the entire list with a new array `l`.                    |
+| `[1].push`     | element: any                | Appends the `element` to the end of the list.                     |
+| `[1].removeAt` | index: number               | Removes the element at the specified `index` from the list.       |
+| `[1].insertAt` | index: number, element: any | Inserts the `element` at the specified `index` in the list.       |
+| `[1].updateAt` | index: number, element: any | Replaces the element at the specified `index` with the `element`. |
+| `[1].clear`    |                             | Removes all elements from the list.                               |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add list
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="list" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useList } from "@/hooks/list"
+```
+
+```tsx
+import ListDemo from "./ListDemo"
+
+export default function App() {
+  const [list, { set, push, removeAt, insertAt, updateAt, clear }] = useList([
+    "First",
+    "Second",
+    "Third",
+  ])
+
+  return (
+    <section>
+      <header>
+        <h1>UseList</h1>
+        <button
+          disabled={list.length < 1}
+          className="link"
+          onClick={() => insertAt(1, "woo")}
+        >
+          Insert After First
+        </button>
+        <button
+          disabled={list.length < 2}
+          className="link"
+          onClick={() => removeAt(1)}
+        >
+          Remove Second Item
+        </button>
+        <button className="link" onClick={() => set([1, 2, 3])}>
+          Reset
+        </button>
+        <button className="link" onClick={() => clear()}>
+          Clear
+        </button>
+      </header>
+      <ListDemo
+        list={list}
+        updateAt={updateAt}
+        push={push}
+        removeAt={removeAt}
+      />
+    </section>
+  )
+}
+```

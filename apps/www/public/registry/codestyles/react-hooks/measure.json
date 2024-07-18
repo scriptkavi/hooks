@@ -1,0 +1,11 @@
+{
+  "name": "measure",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "measure.ts",
+      "content": "import * as React from \"react\"\n\ninterface Dimensions {\n  width: number | null\n  height: number | null\n}\n\nexport function useMeasure(): [(node: Element | null) => void, Dimensions] {\n  const [dimensions, setDimensions] = React.useState<Dimensions>({\n    width: null,\n    height: null,\n  })\n\n  const previousObserver = React.useRef<ResizeObserver | null>(null)\n\n  const customRef = React.useCallback((node: Element | null) => {\n    if (previousObserver.current) {\n      previousObserver.current.disconnect()\n      previousObserver.current = null\n    }\n\n    if (node) {\n      const observer = new ResizeObserver(([entry]) => {\n        if (entry && entry.borderBoxSize && entry.borderBoxSize.length > 0) {\n          const { inlineSize: width, blockSize: height } =\n            entry.borderBoxSize[0]\n          setDimensions({ width, height })\n        } else if (entry.contentRect) {\n          const { width, height } = entry.contentRect\n          setDimensions({ width, height })\n        }\n      })\n\n      observer.observe(node)\n      previousObserver.current = observer\n    }\n  }, [])\n\n  return [customRef, dimensions]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "map",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "map.ts",
+      "content": "import * as React from \"react\"\n\nexport function useMap<K, V>(\n  initialState?: readonly (readonly [K, V])[] | null\n): Map<K, V> {\n  const mapRef = React.useRef(new Map<K, V>(initialState))\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n\n  const originalSet = mapRef.current.set.bind(mapRef.current)\n  mapRef.current.set = (key: K, value: V) => {\n    originalSet(key, value)\n    reRender()\n    return mapRef.current\n  }\n\n  const originalClear = mapRef.current.clear.bind(mapRef.current)\n  mapRef.current.clear = () => {\n    originalClear()\n    reRender()\n  }\n\n  const originalDelete = mapRef.current.delete.bind(mapRef.current)\n  mapRef.current.delete = (key: K) => {\n    const result = originalDelete(key)\n    reRender()\n    return result\n  }\n\n  return mapRef.current\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

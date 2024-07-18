@@ -1,0 +1,11 @@
+{
+  "name": "render-count",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "render-count.ts",
+      "content": "import * as React from \"react\"\n\nexport function useRenderCount(): number {\n  const count = React.useRef(0)\n\n  count.current++\n\n  return count.current\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

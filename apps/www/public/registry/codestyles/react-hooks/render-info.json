@@ -1,0 +1,11 @@
+{
+  "name": "render-info",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "render-info.ts",
+      "content": "import * as React from \"react\"\n\ninterface RenderInfo {\n  name: string\n  renders: number\n  sinceLastRender: number\n  timestamp: number\n}\n\nexport function useRenderInfo(name = \"Unknown\"): RenderInfo | undefined {\n  const count = React.useRef(0)\n  const lastRender = React.useRef<number | undefined>()\n  const now = Date.now()\n\n  count.current++\n\n  React.useEffect(() => {\n    lastRender.current = Date.now()\n  })\n\n  const sinceLastRender = lastRender.current ? now - lastRender.current : 0\n\n  if (process.env.NODE_ENV !== \"production\") {\n    const info = {\n      name,\n      renders: count.current,\n      sinceLastRender,\n      timestamp: now,\n    }\n\n    console.log(info)\n\n    return info\n  }\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "set",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "set.ts",
+      "content": "import * as React from \"react\"\n\nexport function useSet<T>(values?: Iterable<T>): Set<T> {\n  const setRef = React.useRef(new Set(values))\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n\n  const originalAdd = setRef.current.add.bind(setRef.current)\n  setRef.current.add = (value: T) => {\n    const res = originalAdd(value)\n    reRender()\n    return res\n  }\n\n  const originalClear = setRef.current.clear.bind(setRef.current)\n  setRef.current.clear = () => {\n    originalClear()\n    reRender()\n  }\n\n  const originalDelete = setRef.current.delete.bind(setRef.current)\n  setRef.current.delete = (value: T) => {\n    const res = originalDelete(value)\n    reRender()\n    return res\n  }\n\n  return setRef.current\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

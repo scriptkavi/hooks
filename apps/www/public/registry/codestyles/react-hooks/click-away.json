@@ -1,0 +1,11 @@
+{
+  "name": "click-away",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "click-away.ts",
+      "content": "import { MutableRefObject, useEffect, useLayoutEffect, useRef } from \"react\"\n\nexport function useClickAway<T extends HTMLElement>(\n  cb: (e: MouseEvent | TouchEvent) => void\n): MutableRefObject<T | null> {\n  const ref = useRef<T>(null)\n  const refCb = useRef(cb)\n\n  useLayoutEffect(() => {\n    refCb.current = cb\n  })\n\n  useEffect(() => {\n    const handler = (e: MouseEvent | TouchEvent) => {\n      const element = ref.current\n      if (element && !element.contains(e.target as Node)) {\n        refCb.current(e)\n      }\n    }\n\n    document.addEventListener(\"mousedown\", handler)\n    document.addEventListener(\"touchstart\", handler)\n\n    return () => {\n      document.removeEventListener(\"mousedown\", handler)\n      document.removeEventListener(\"touchstart\", handler)\n    }\n  }, [])\n\n  return ref\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -1,0 +1,99 @@
+---
+title: Window Scroll
+description: Track and manipulate the scroll position of a web page
+component: true
+---
+
+## About
+
+The `useWindowScroll` hook tracks and manipulates the scroll position of a webpage within a React component. It provides access to the current scroll coordinates (x and y) through the “state” object and a “scrollTo” function to programmatically scroll to a specific position on the page. This hook is useful for dynamic behavior based on the scroll position, such as lazy-loading content, infinite scrolling, or implementing smooth scrolling animations.
+
+## Return Values
+
+| Name       | Type     | Description                                                              |
+| ---------- | -------- | ------------------------------------------------------------------------ |
+| `state`    | object   | An object representing the current window scroll position.               |
+| `scrollTo` | function | A function that can be used to scroll the window to a specific position. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add window-scroll
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="window-scroll" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useWindowScroll } from "@/hooks/window-scroll"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const [{ x, y }, scrollTo] = useWindowScroll()
+  return (
+    <section>
+      <header>
+        <h1>useWindowScroll</h1>
+        <button className="link" onClick={() => scrollTo(0, 1000)}>
+          Scroll To (0, 1000)
+        </button>
+        <button
+          className="link"
+          onClick={() => scrollTo({ left: 0, top: 2000, behavior: "smooth" })}
+        >
+          Scroll To (0, 2000) (Smoothly)
+        </button>
+        <button
+          className="link"
+          onClick={() => scrollTo({ left: 0, top: 0, behavior: "smooth" })}
+        >
+          Back To The Top
+        </button>
+      </header>
+
+      {new Array(50).fill().map((_, index) => {
+        return <p key={index}>{index}</p>
+      })}
+      <aside style={{ position: "fixed", bottom: 0, right: 0 }}>
+        Coordinates <span className="x">x: {x}</span>{" "}
+        <span className="y">y: {y}</span>{" "}
+      </aside>
+    </section>
+  )
+}
+```

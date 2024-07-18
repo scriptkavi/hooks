@@ -1,0 +1,87 @@
+---
+title: Hover
+description: Track whether an element is being hovered over
+component: true
+---
+
+## About
+
+The `useHover` hook allows you to track whether an element is being hovered over. It returns a reference to attach to the target element and the current hovering status, enabling conditional rendering or actions based on the hover state.
+
+## Return Values
+
+| Index | Type    | Description                                                                |
+| ----- | ------- | -------------------------------------------------------------------------- |
+| 0     | ref     | A ref object that can be attached to the element intended to be hovered.   |
+| 1     | boolean | A boolean value indicating whether the element is currently being hovered. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add hover
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="hover" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useHover } from "@/hooks/hover"
+```
+
+```tsx
+import * as React from "react"
+
+function getRandomColor() {
+  const colors = ["green", "blue", "purple", "red", "pink"]
+  return colors[Math.floor(Math.random() * colors.length)]
+}
+
+export default function App() {
+  const [ref, hovering] = useHover()
+
+  const backgroundColor = hovering
+    ? `var(--${getRandomColor()})`
+    : "var(--charcoal)"
+
+  return (
+    <section>
+      <h1>useHover</h1>
+      <article ref={ref} style={{ backgroundColor }}>
+        Hovering? {hovering ? "Yes" : "No"}
+      </article>
+    </section>
+  )
+}
+```

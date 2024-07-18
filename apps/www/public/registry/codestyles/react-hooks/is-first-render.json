@@ -1,0 +1,11 @@
+{
+  "name": "is-first-render",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "is-first-render.ts",
+      "content": "import * as React from \"react\"\n\nexport function useIsFirstRender(): boolean {\n  const renderRef = React.useRef(true)\n\n  if (renderRef.current === true) {\n    renderRef.current = false\n    return true\n  }\n\n  return false\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

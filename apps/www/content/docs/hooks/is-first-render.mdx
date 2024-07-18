@@ -1,0 +1,80 @@
+---
+title: Is First Render
+description: Differentiate between the first and subsequent renders
+component: true
+---
+
+## About
+
+The `useIsFirstRender` hook helps determine if the current render is the first render of a component. This is particularly useful for conditionally executing logic or rendering specific components only on the initial render, distinguishing efficiently between the first and subsequent renders.
+
+## Return Values
+
+| Name          | Type    | Description                                      |
+| ------------- | ------- | ------------------------------------------------ |
+| isFirstRender | boolean | `true` for the first render, `false` for others. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add is-first-render
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="is-first-render" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useIsFirstRender } from "@/hooks/is-first-render"
+```
+
+```tsx
+import * as React from "react"
+
+export default function App() {
+  const isFirstRender = useIsFirstRender()
+  const [count, rerender] = React.useReducer((x) => x + 1, 1)
+
+  return (
+    <section>
+      <h1>useIsFirstRender</h1>
+      <h2>First Render? {isFirstRender ? "Yes" : "No"}</h2>
+      <button className="primary" onClick={rerender}>
+        re-render
+      </button>
+      <p>Render Count: {count}</p>
+    </section>
+  )
+}
+```

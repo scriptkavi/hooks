@@ -1,0 +1,104 @@
+---
+title: Script
+description: Load and manage external JavaScript scripts
+component: true
+---
+
+## About
+
+The `useScript` hook dynamically loads external JavaScript scripts into a React component. It manages the loading and status of the script, allowing conditional rendering or actions based on whether the script has been successfully loaded or encountered an error. The hook tracks the script’s status and offers options to remove the script when the component unmounts, ensuring proper cleanup.
+
+## Parameters
+
+| Name    | Type   | Description                                                                                                                                                                                                                       |
+| ------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| src     | string | This is the URL source of the script to be loaded.                                                                                                                                                                                |
+| options | object | This is an optional configuration object provided when calling `useScript`. It currently accepts one property `removeOnUnmount` which when set to `true`, will remove the script tag from the document body on component unmount. |
+
+## Return Values
+
+| Name   | Type   | Description                                                                                                                                                                                     |
+| ------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status | string | This represents the status of the script load, `loading`, `ready`, `error`, or `unknown`. An `unknown` script is one that previously exists in the document, but was not added via `useScript`. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add script
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="script" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useScript } from "@/hooks/script"
+```
+
+```tsx
+import * as React from "react"
+
+import ScriptMeta from "./ScriptMeta"
+
+export default function App() {
+  const status = useScript(
+    `https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js`,
+    {
+      removeOnUnmount: false,
+    }
+  )
+
+  React.useEffect(() => {
+    if (typeof window.$$ !== "undefined") {
+      const id = document.id("moo")
+      id.setStyle("background-color", "var(--green)")
+    }
+  }, [status])
+
+  const isReady = status === "ready"
+
+  return (
+    <section>
+      <h1>useScript</h1>
+      <p>
+        <span id="moo" className={isReady ? "ready" : ""} />
+        <label>Status: {status}</label>
+      </p>
+      {status === "ready" && (
+        <ScriptMeta title="MooTools" status={status} meta={window.MooTools} />
+      )}
+    </section>
+  )
+}
+```

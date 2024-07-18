@@ -1,0 +1,103 @@
+---
+title: Copy to Clipboard
+description: Copy text to the clipboard.
+component: true
+---
+
+## About
+
+The `useCopyToClipboard` hook is valuable as it simplifies the process of copying text to the clipboard in a way that works across different browsers. It leverages the modern `navigator.clipboard.writeText` method when available, offering a more efficient and secure method for copying text. If the `writeText` method isn't supported by the browser, the hook gracefully falls back to the conventional approach using `document.execCommand("copy")`.
+
+## Return Values
+
+| Index | Type     | Description                                            |
+| ----- | -------- | ------------------------------------------------------ |
+| 0     | string   | The value that was last copied to the clipboard.       |
+| 1     | function | A function to copy a specified value to the clipboard. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add copy-to-clipboard
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="copy-to-clipboard" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useCopyToClipboard } from "@/hooks/copy-to-clipboard"
+```
+
+```tsx
+import * as React from "react"
+
+import { checkIcon, copyIcon } from "./icons"
+
+const randomHash = crypto.randomUUID()
+
+export default function App() {
+  const [copiedText, copyToClipboard] = useCopyToClipboard()
+  const hasCopiedText = Boolean(copiedText)
+  return (
+    <section>
+      <h1>useCopyToClipboard</h1>
+      <article>
+        <label>Fake API Key</label>
+        <pre>
+          <code>{randomHash}</code>
+          <button
+            disabled={hasCopiedText}
+            className="link"
+            onClick={() => copyToClipboard(randomHash)}
+          >
+            {hasCopiedText ? checkIcon : copyIcon}
+          </button>
+        </pre>
+      </article>
+      {hasCopiedText && (
+        <dialog open={hasCopiedText}>
+          <h4>
+            Copied{" "}
+            <span role="img" aria-label="Celebrate Emoji">
+              🎉
+            </span>
+          </h4>
+          <textarea placeholder="Paste your copied text" />
+        </dialog>
+      )}
+    </section>
+  )
+}
+```

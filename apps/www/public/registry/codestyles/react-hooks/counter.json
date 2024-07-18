@@ -1,0 +1,11 @@
+{
+  "name": "counter",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "counter.ts",
+      "content": "import * as React from \"react\"\n\ninterface UseCounterOptions {\n  min?: number\n  max?: number\n}\n\nexport function useCounter(\n  startingValue: number = 0,\n  options: UseCounterOptions = {}\n): [\n  number,\n  {\n    increment: () => void\n    decrement: () => void\n    set: (nextCount: number) => void\n    reset: () => void\n  }\n] {\n  const { min, max } = options\n\n  if (typeof min === \"number\" && startingValue < min) {\n    throw new Error(\n      `Your starting value of ${startingValue} is less than your min of ${min}.`\n    )\n  }\n\n  if (typeof max === \"number\" && startingValue > max) {\n    throw new Error(\n      `Your starting value of ${startingValue} is greater than your max of ${max}.`\n    )\n  }\n\n  const [count, setCount] = React.useState<number>(startingValue)\n\n  const increment = React.useCallback(() => {\n    setCount((c) => {\n      const nextCount = c + 1\n\n      if (typeof max === \"number\" && nextCount > max) {\n        return c\n      }\n\n      return nextCount\n    })\n  }, [max])\n\n  const decrement = React.useCallback(() => {\n    setCount((c) => {\n      const nextCount = c - 1\n\n      if (typeof min === \"number\" && nextCount < min) {\n        return c\n      }\n\n      return nextCount\n    })\n  }, [min])\n\n  const set = React.useCallback(\n    (nextCount: number) => {\n      setCount((c) => {\n        if (typeof max === \"number\" && nextCount > max) {\n          return c\n        }\n\n        if (typeof min === \"number\" && nextCount < min) {\n          return c\n        }\n\n        return nextCount\n      })\n    },\n    [max, min]\n  )\n\n  const reset = React.useCallback(() => {\n    setCount(startingValue)\n  }, [startingValue])\n\n  return [\n    count,\n    {\n      increment,\n      decrement,\n      set,\n      reset,\n    },\n  ]\n}\n"
+    }
+  ],
+  "type": "hooks:hook"
+}
