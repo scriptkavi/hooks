@@ -1,4 +1,4 @@
-import va from "@vercel/analytics"
+import { Logger } from 'next-axiom';
 import { z } from "zod"
 
 const eventSchema = z.object({
@@ -24,8 +24,10 @@ const eventSchema = z.object({
 export type Event = z.infer<typeof eventSchema>
 
 export function trackEvent(input: Event): void {
+  const log = new Logger();
   const event = eventSchema.parse(input)
   if (event) {
-    va.track(event.name, event.properties)
+    log.info(event.name, event.properties)
   }
+  log.flush();
 }

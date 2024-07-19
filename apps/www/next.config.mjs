@@ -1,3 +1,4 @@
+import { withAxiom } from "next-axiom"
 import { createContentlayerPlugin } from "next-contentlayer"
 
 /** @type {import('next').NextConfig} */
@@ -41,4 +42,4 @@ const withContentlayer = createContentlayerPlugin({
   // Additional Contentlayer config options
 })
 
-export default withContentlayer(nextConfig)
+export default withAxiom(withContentlayer(nextConfig))

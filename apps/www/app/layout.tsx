@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata, Viewport } from "next"
+import { AxiomWebVitals } from "next-axiom"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -70,7 +71,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "bg-background min-h-screen font-sans antialiased",
+            "min-h-screen bg-background font-sans antialiased",
             fontSans.variable
           )}
         >
@@ -81,16 +82,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <div vaul-drawer-wrapper="">
-              <div className="bg-background relative flex min-h-screen flex-col">
+              <div className="relative flex min-h-screen flex-col bg-background">
                 {children}
               </div>
             </div>
             {/* <TailwindIndicator />
-            <ThemeSwitcher />
-            <Analytics />
-            <NewYorkToaster />
+            <ThemeSwitcher /> */}
+            {/* <Analytics /> */}
+            {/* <NewYorkToaster />
             <DefaultToaster />
             <NewYorkSonner /> */}
+            <AxiomWebVitals />
           </ThemeProvider>
         </body>
       </html>
