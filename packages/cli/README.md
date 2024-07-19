@@ -1,43 +1,43 @@
-# shadcn-ui
+# scriptkavi-hooks
 
-A CLI for adding components to your project.
+A CLI for adding hooks to your project.
 
 ## Usage
 
-Use the `init` command to initialize dependencies for a new project.
+Use the `init` command to initialize configuration and dependencies for a new project.
 
-The `init` command installs dependencies, adds the `cn` util, configures `tailwind.config.js`, and CSS variables for the project.
+The `init` command configures the project.
 
 ```bash
-npx shadcn-ui init
+npx scriptkavi-hooks init
 ```
 
 ## add
 
-Use the `add` command to add components to your project.
+Use the `add` command to add hooks to your project.
 
-The `add` command adds a component to your project and installs all required dependencies.
+The `add` command adds a hook to your project and installs all required dependencies.
 
 ```bash
-npx shadcn-ui add [component]
+npx scriptkavi-hooks add [hook]
 ```
 
 ### Example
 
 ```bash
-npx shadcn-ui add alert-dialog
+npx scriptkavi-hooks add debounce
 ```
 
 You can also run the command without any arguments to view a list of all available components:
 
 ```bash
-npx shadcn-ui add
+npx scriptkavi-hooks add
 ```
 
 ## Documentation
 
-Visit https://ui.shadcn.com/docs/cli to view the documentation.
+Visit https://hooks.scriptkavi.com/docs/cli to view the documentation.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+Licensed under the [MIT license](https://github.com/scriptkavi/hooks/blob/main/LICENSE.md).
