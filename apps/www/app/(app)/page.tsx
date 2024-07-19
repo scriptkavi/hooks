@@ -65,7 +65,7 @@ export default function IndexPage() {
         </div>
         <div className="relative flex h-[100px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:h-[250px] md:w-[400px]">
           <WordRotate
-            className="text-4xl font-bold text-black dark:text-white"
+            className="text-4xl font-bold text-primary "
             words={[
               "useDebounce",
               "useWindowSize",
