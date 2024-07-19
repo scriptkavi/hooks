@@ -27,7 +27,7 @@ import {
 export default function IndexPage() {
   return (
     <div className="container relative">
-      <PageHeader className="flex flex-row items-center">
+      <PageHeader className="flex flex-col-reverse items-center md:flex-row">
         <div className="flex-1">
           <Announcement />
           <PageHeaderHeading className="py-4">
@@ -63,24 +63,17 @@ export default function IndexPage() {
             </div>
           </PageFrameworks>
         </div>
-        <div className="relative hidden h-[250px] w-[400px] flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:flex lg:flex">
+        <div className="relative flex h-[100px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:h-[250px] md:w-[400px]">
           <WordRotate
             className="text-4xl font-bold text-black dark:text-white"
             words={[
               "useDebounce",
-              "useLocalStorage",
               "useWindowSize",
               "usePrevious",
-              "useNetworkState",
-              "useOrientation",
               "useMediaQuery",
-              "useSessionStorage",
               "useFetch",
-              "useContinousRetry",
-              "useVisibilityChange",
               "useScript",
               "useRenderInfo",
-              "useRenderCount",
               "useQueue",
               "useIsClient",
               "useHover",

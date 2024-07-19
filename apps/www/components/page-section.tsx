@@ -8,7 +8,7 @@ function PageSection({
   return (
     <section
       className={cn(
-        "mx-auto flex flex-col items-center justify-center gap-2 px-4 py-8 md:py-12 md:pb-8 lg:py-12 lg:pb-10",
+        "mx-auto flex flex-col justify-center gap-2 px-4 py-8 md:items-center md:py-12 md:pb-8 lg:py-12 lg:pb-10",
         className
       )}
       {...props}
@@ -40,7 +40,7 @@ function PageSectionDescription({
   return (
     <p
       className={cn(
-        "text-balance max-w-2xl text-center text-lg font-light text-foreground",
+        "text-balance max-w-2xl text-lg font-light text-foreground md:text-center",
         className
       )}
       {...props}
@@ -70,7 +70,7 @@ function PageSectionActions({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center gap-2 py-4",
+        "flex w-full gap-2 py-4 md:items-center md:justify-center",
         className
       )}
       {...props}
