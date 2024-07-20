@@ -44,7 +44,7 @@ export const docsConfig: DocsConfig = {
       ]
     },
     {
-      title: "Hooks",
+      title: "General Hooks",
       items: [
         {
           title: "Battery",
