@@ -94,10 +94,10 @@ export async function promptForConfig(
     {
       type: "select",
       name: "codestyle",
-      message: `Which ${highlight("code style")} would you like to use?`,
-      choices: codestyles.map((style) => ({
-        title: style.label,
-        value: style.name,
+      message: `Which ${highlight("codestyle")} would you like to use?`,
+      choices: codestyles.map((codestyle) => ({
+        title: codestyle.label,
+        value: codestyle.name,
       })),
     },
     {
@@ -116,7 +116,7 @@ export async function promptForConfig(
 
   const config = rawConfigSchema.parse({
     $schema: "https://hooks.scriptkavi.com/schema.json",
-    style: options.codestyle,
+    codestyle: options.codestyle,
     tsx: options.typescript,
     aliases: {
       utils: options.utils,
@@ -163,10 +163,10 @@ export async function promptForMinimalConfig(
       {
         type: "select",
         name: "codestyle",
-        message: `Which ${highlight("code style")} would you like to use?`,
-        choices: codestyles.map((style) => ({
-          title: style.label,
-          value: style.name,
+        message: `Which ${highlight("codestyle")} would you like to use?`,
+        choices: codestyles.map((codestyle) => ({
+          title: codestyle.label,
+          value: codestyle.name,
         })),
       },
     ])
