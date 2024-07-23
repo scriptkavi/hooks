@@ -17,11 +17,11 @@ const firebaseConfig = {
 
 export const GoogleAnalytics = () => {
   useEffect(() => {
-    console.log(process.env.NODE_ENV)
     if (process.env.NODE_ENV === "production") {
       if (firebaseConfig?.projectId) {
         const app = initializeApp(firebaseConfig)
         if (app.name && typeof window !== "undefined") {
+          console.log(process.env.NODE_ENV)
           const analytics = getAnalytics(app)
         }
       }
