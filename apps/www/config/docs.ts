@@ -249,6 +249,16 @@ export const docsConfig: DocsConfig = {
         },
         
       ]
+    },
+    {
+      title: "Other Links",
+      items: [
+        {
+          title: "About",
+          href: "/docs/about",
+          items: [],
+        }
+      ]
     }
   ]
 }
