@@ -20,6 +20,13 @@ export const hooks: Registry = [
     files: ["hook/click-away.ts"],
   },
   {
+    name: "cookies",
+    type: "hooks:hook",
+    dependencies: ["js-cookie"],
+    devDependencies: ["@types/js-cookie"],
+    files: ["hook/cookies.ts", "hook/memoized-fn.ts"],
+  },
+  {
     name: "copy-to-clipboard",
     type: "hooks:hook",
     dependencies: [],

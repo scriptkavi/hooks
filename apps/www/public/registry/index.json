@@ -24,6 +24,17 @@
     "type": "hooks:hook"
   },
   {
+    "name": "cookies",
+    "dependencies": [
+      "js-cookie"
+    ],
+    "files": [
+      "hook/cookies.ts",
+      "hook/memoized-fn.ts"
+    ],
+    "type": "hooks:hook"
+  },
+  {
     "name": "copy-to-clipboard",
     "dependencies": [],
     "files": [
