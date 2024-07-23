@@ -28,6 +28,9 @@
     "dependencies": [
       "js-cookie"
     ],
+    "devDependencies": [
+      "@types/js-cookie"
+    ],
     "files": [
       "hook/cookies.ts",
       "hook/memoized-fn.ts"
