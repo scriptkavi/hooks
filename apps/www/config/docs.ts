@@ -57,6 +57,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Cookies",
+          href: "/docs/hooks/cookies",
+          items: [],
+          label: "New"
+        },
+        {
           title: "Copy to Clipboard",
           href: "/docs/hooks/copy-to-clipboard",
           items: [],

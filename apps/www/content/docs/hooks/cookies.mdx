@@ -1,0 +1,125 @@
+---
+title: Cookies
+description: Store and retrieve from the browser’s cookie storage.
+component: true
+---
+
+## About
+
+The `useCookie` hook is a custom React hook designed to manage state synchronized with cookies. It leverages the `js-cookie` library for cookie manipulation and provides a seamless interface for React components to work with cookie-based state. This hook is particularly useful when you need to persist state across page reloads or sessions, such as user preferences, authentication tokens, or other client-specific data.
+
+## Parameters
+
+| Property  | Type      | Description                    | Default |
+| --------- | --------- | ------------------------------ | ------- |
+| cookieKey | `string`  | The key of Cookie              | -       |
+| options   | `Options` | Optional. Cookie configuration | -       |
+
+## Return Values
+
+| Property | Type                    | Description         |
+| -------- | ----------------------- | ------------------- |
+| state    | `string` \| `undefined` | Local Cookie value  |
+| setState | `SetState`              | Update Cookie value |
+
+setState can update cookie options, which will be merged with the options set by `useCookieState`.
+
+`const targetOptions = { ...options, ...updateOptions }`
+
+If you want to delete this record from document.cookie, use `setState()` or `setState(undefined)`.
+
+## Options
+
+| Property     | Description                                                                                | Type                                                       | Default     |
+| ------------ | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | ----------- |
+| defaultValue | Optional. Default value, but not store to Cookie                                           | `string` \| `undefined` \| `(() => (string \| undefined))` | `undefined` |
+| expires      | Optional. Set Cookie expiration time                                                       | `number` \| `Date`                                         | -           |
+| path         | Optional. Specify available paths                                                          | `string`                                                   | `/`         |
+| domain       | Optional. Specify available domain. Default creation domain                                | `string`                                                   | -           |
+| secure       | Optional. Specify whether the Cookie can only be transmitted over secure protocol as https | `boolean`                                                  | `false`     |
+| sameSite     | Optional. Specify whether the browser can send this Cookie along with cross-site requests  | `strict` \| `lax` \| `none`                                | -           |
+
+Options is same as [js-cookie attributes](https://github.com/js-cookie/js-cookie#cookie-attributes).
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add cookies
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="cookies" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useCookie } from "@/hooks/cookies"
+```
+
+```tsx
+import React from "react"
+
+import useCookie from "./useCookie"
+
+const CookieComponent: React.FC = () => {
+  const [username, setUsername] = useCookie("username", {
+    defaultValue: "Guest",
+    expires: 7, // Cookie will expire in 7 days
+    path: "/",
+    secure: true,
+    sameSite: "Lax",
+  })
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value)
+  }
+
+  const handleClear = () => {
+    setUsername(undefined) // This will remove the cookie
+  }
+
+  return (
+    <div>
+      <h1>Manage Cookies</h1>
+      <label>
+        Username:
+        <input type="text" value={username} onChange={handleChange} />
+      </label>
+      <button onClick={handleClear}>Clear Username</button>
+      <p>Current Username: {username}</p>
+    </div>
+  )
+}
+
+export default CookieComponent
+```

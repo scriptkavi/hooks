@@ -38,6 +38,17 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "cookies": {
+      name: "cookies",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/cookies")),
+      source: "",
+      files: ["registry/react-hooks/hook/cookies.ts","registry/react-hooks/hook/memoized-fn.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
     "copy-to-clipboard": {
       name: "copy-to-clipboard",
       type: "hooks:hook",
