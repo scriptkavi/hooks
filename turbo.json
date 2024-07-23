@@ -11,7 +11,8 @@
         "HOOKS_REGISTRY_URL",
         "npm_config_user_agent",
         "https_proxy",
-        "DEPLOYMENT_PROTECTION_BYPASS"
+        "DEPLOYMENT_PROTECTION_BYPASS",
+        "NEXT_PUBLIC_MEASUREMENT_ID"
       ],
       "outputs": ["dist/**", ".next/**"]
     },

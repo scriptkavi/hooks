@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/classnames-order */
 import "@/styles/globals.css"
 import { Metadata, Viewport } from "next"
 import { AxiomWebVitals } from "next-axiom"
