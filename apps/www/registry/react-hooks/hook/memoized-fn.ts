@@ -25,7 +25,6 @@ function useMemoizedFn<T extends noop>(fn: T) {
   const fnRef = useRef<T>(fn)
 
   // why not write `fnRef.current = fn`?
-  // https://github.com/alibaba/hooks/issues/728
   fnRef.current = useMemo<T>(() => fn, [fn])
 
   const memoizedFn = useRef<PickFunction<T>>()

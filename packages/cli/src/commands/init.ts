@@ -202,6 +202,8 @@ export async function runInit(cwd: string, config: Config) {
       ? path.dirname(resolvedPath)
       : resolvedPath
 
+    console.log("dirname", dirname)
+
     // If the utils alias is set to something like "@/lib/utils",
     // assume this is a file and remove the "utils" file name.
     // TODO: In future releases we should add support for individual utils.

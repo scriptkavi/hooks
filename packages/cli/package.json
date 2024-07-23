@@ -1,6 +1,6 @@
 {
   "name": "scriptkavi-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Add hooks to your apps.",
   "publishConfig": {
     "access": "public"
