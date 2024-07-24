@@ -134,6 +134,14 @@
     "type": "hooks:hook"
   },
   {
+    "name": "latest",
+    "dependencies": [],
+    "files": [
+      "hook/latest.ts"
+    ],
+    "type": "hooks:hook"
+  },
+  {
     "name": "list",
     "dependencies": [],
     "files": [
@@ -302,10 +310,30 @@
     "type": "hooks:hook"
   },
   {
+    "name": "unmount",
+    "dependencies": [],
+    "files": [
+      "hook/unmount.ts",
+      "hook/latest.ts"
+    ],
+    "type": "hooks:hook"
+  },
+  {
     "name": "visibility-change",
     "dependencies": [],
     "files": [
       "hook/visibility-change.ts"
+    ],
+    "type": "hooks:hook"
+  },
+  {
+    "name": "web-socket",
+    "dependencies": [],
+    "files": [
+      "hook/web-socket.ts",
+      "hook/latest.ts",
+      "hook/memoized-fn.ts",
+      "hook/unmount.ts"
     ],
     "type": "hooks:hook"
   },

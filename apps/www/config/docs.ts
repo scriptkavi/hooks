@@ -128,6 +128,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Latest",
+          href: "/docs/hooks/latest",
+          items: [],
+          label: "New"
+        },
+        {
           title: "List",
           href: "/docs/hooks/list",
           items: [],
@@ -233,9 +239,21 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Unmount",
+          href: "/docs/hooks/unmount",
+          items: [],
+          label: "New"
+        },
+        {
           title: "Visibility Change",
           href: "/docs/hooks/visibility-change",
           items: [],
+        },
+        {
+          title: "WebSocket",
+          href: "/docs/hooks/websocket",
+          items: [],
+          label: "New"
         },
         {
           title: "Window Scroll",

@@ -1,0 +1,117 @@
+---
+title: WebSocket
+description: A hook for WebSocket.
+component: true
+---
+
+## About
+
+The `useWebSocket` hook is a custom React hook that manages a WebSocket connection. It provides an easy-to-use interface for connecting, disconnecting, and sending messages through a WebSocket, along with handling reconnection logic and various WebSocket events.
+
+## Parameters
+
+| Name      | Type      | Description                     |
+| --------- | --------- | ------------------------------- |
+| socketUrl | string    | Required, webSocket url.        |
+| options   | `Options` | connect the configuration item. |
+
+## Return Values
+
+| Name          | Type                           | Description                                                                            |
+| ------------- | ------------------------------ | -------------------------------------------------------------------------------------- |
+| latestMessage | `WebSocketEventMap['message']` | Latest message                                                                         |
+| sendMessage   | `WebSocket['send']`            | Send message function                                                                  |
+| disconnect    | `() => void`                   | Disconnect webSocket manually                                                          |
+| connect       | `() => void`                   | Connect webSocket manually. If already connected, close the current one and reconnect. |
+| readyState    | `ReadyState`                   | Current webSocket connection status                                                    |
+| webSocketIns  | `WebSocket`                    | WebSocket instance                                                                     |
+
+## Options
+
+| Name              | Type                                                                   | Description                        | Default |
+| ----------------- | ---------------------------------------------------------------------- | ---------------------------------- | ------- |
+| onOpen            | `(event: WebSocketEventMap['open'], instance: WebSocket) => void`      | The webSocket connect callback     | -       |
+| onClose           | `(event: WebSocketEventMap['close'], instance: WebSocket) => void`     | WebSocket close callback           | -       |
+| onMessage         | `(message: WebSocketEventMap['message'], instance: WebSocket) => void` | WebSocket receive message callback | -       |
+| onError           | `(event: WebSocketEventMap['error'], instance: WebSocket) => void`     | WebSocket error callback.          | -       |
+| reconnectLimit    | number                                                                 | Retry times                        | 3       |
+| reconnectInterval | number                                                                 | Retry interval(ms)                 | 3000    |
+| manual            | boolean                                                                | Manually starts connection         | false   |
+| protocols         | string \| string[]                                                     | Sub protocols                      | -       |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add web-socket
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="toggle" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useWebSocket } from "@/hooks/web-socket"
+```
+
+```tsx
+import React, { useEffect } from "react"
+
+function WebSocketComponent() {
+  const socketUrl = "wss://example.com/socket"
+  const { latestMessage, sendMessage, connect, disconnect, readyState } =
+    useWebSocket(socketUrl, {
+      onOpen: () => console.log("WebSocket connection opened"),
+      onClose: () => console.log("WebSocket connection closed"),
+      onMessage: (message) => console.log("Received message:", message.data),
+      onError: (error) => console.error("WebSocket error:", error),
+    })
+
+  useEffect(() => {
+    if (readyState === ReadyState.Open) {
+      sendMessage("Hello, WebSocket!")
+    }
+  }, [readyState])
+
+  return (
+    <div>
+      <button onClick={connect}>Connect</button>
+      <button onClick={disconnect}>Disconnect</button>
+      <div>Ready State: {readyState}</div>
+      <div>Latest Message: {latestMessage?.data}</div>
+    </div>
+  )
+}
+
+export default WebSocketComponent
+```

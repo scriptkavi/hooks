@@ -1,0 +1,93 @@
+---
+title: Unmount
+description: A Hook can be used to get whether the component is unmounted.
+component: true
+---
+
+## About
+
+The `useUnmount` hook is a custom React hook that allows you to execute a function when a component is unmounted. This can be useful for cleaning up resources, such as timers or subscriptions, when a component is removed from the DOM.
+
+## Parameters
+
+| Name | Type         | Description                                              |
+| ---- | ------------ | -------------------------------------------------------- |
+| fn   | `() => void` | The function to be executed when the component unmounts. |
+
+## Return Values
+
+| Name       | Type                   | Description                        |
+| ---------- | ---------------------- | ---------------------------------- |
+| unmountRef | `{ current: boolean }` | Whether the component is unmounted |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add unmount
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="toggle" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useUnmount } from "@/hooks/unmount"
+```
+
+```tsx
+import React, { useState } from "react"
+
+function ExampleComponent() {
+  useUnmount(() => {
+    console.log("Component has been unmounted!")
+  })
+
+  return <div>Example Component</div>
+}
+
+function App() {
+  const [showComponent, setShowComponent] = useState(true)
+
+  return (
+    <div>
+      <button onClick={() => setShowComponent(!showComponent)}>
+        Toggle Component
+      </button>
+      {showComponent && <ExampleComponent />}
+    </div>
+  )
+}
+
+export default App
+```

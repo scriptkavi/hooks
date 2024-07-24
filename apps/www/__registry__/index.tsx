@@ -181,6 +181,17 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "latest": {
+      name: "latest",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/latest")),
+      source: "",
+      files: ["registry/react-hooks/hook/latest.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
     "list": {
       name: "list",
       type: "hooks:hook",
@@ -412,6 +423,17 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "unmount": {
+      name: "unmount",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/unmount")),
+      source: "",
+      files: ["registry/react-hooks/hook/unmount.ts","registry/react-hooks/hook/latest.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
     "visibility-change": {
       name: "visibility-change",
       type: "hooks:hook",
@@ -419,6 +441,17 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/react-hooks/hook/visibility-change")),
       source: "",
       files: ["registry/react-hooks/hook/visibility-change.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "web-socket": {
+      name: "web-socket",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/web-socket")),
+      source: "",
+      files: ["registry/react-hooks/hook/web-socket.ts","registry/react-hooks/hook/latest.ts","registry/react-hooks/hook/memoized-fn.ts","registry/react-hooks/hook/unmount.ts"],
       category: "undefined",
       subcategory: "undefined",
       chunks: []

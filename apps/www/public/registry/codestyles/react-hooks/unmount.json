@@ -1,0 +1,15 @@
+{
+  "name": "unmount",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "unmount.ts",
+      "content": "import { useEffect } from 'react';\nimport useLatest from './latest';\n\nconst isFunction = (value: unknown): value is (...args: any) => any =>\n  typeof value === 'function';\n\nconst isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';\n\nconst useUnmount = (fn: () => void) => {\n  if (isDev) {\n    if (!isFunction(fn)) {\n      console.error(`useUnmount expected parameter is a function, got ${typeof fn}`);\n    }\n  }\n\n  const fnRef = useLatest(fn);\n\n  useEffect(\n    () => () => {\n      fnRef.current();\n    },\n    [],\n  );\n};\n\nexport default useUnmount;\n"
+    },
+    {
+      "name": "latest.ts",
+      "content": "import { useRef } from 'react';\n\nfunction useLatest<T>(value: T) {\n  const ref = useRef(value);\n  ref.current = value;\n\n  return ref;\n}\n\nexport default useLatest;\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

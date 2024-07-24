@@ -89,8 +89,6 @@ import { useCookie } from "@/hooks/cookies"
 ```tsx
 import React from "react"
 
-import useCookie from "./useCookie"
-
 const CookieComponent: React.FC = () => {
   const [username, setUsername] = useCookie("username", {
     defaultValue: "Guest",

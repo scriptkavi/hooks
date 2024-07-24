@@ -1,0 +1,11 @@
+{
+  "name": "latest",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "latest.ts",
+      "content": "import { useRef } from 'react';\n\nfunction useLatest<T>(value: T) {\n  const ref = useRef(value);\n  ref.current = value;\n\n  return ref;\n}\n\nexport default useLatest;\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

@@ -99,6 +99,12 @@ export const hooks: Registry = [
     files: ["hook/is-first-render.ts"],
   },
   {
+    name: "latest",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/latest.ts"],
+  },
+  {
     name: "list",
     type: "hooks:hook",
     dependencies: [],
@@ -225,10 +231,27 @@ export const hooks: Registry = [
     files: ["hook/toggle.ts"],
   },
   {
+    name: "unmount",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/unmount.ts", "hook/latest.ts"],
+  },
+  {
     name: "visibility-change",
     type: "hooks:hook",
     dependencies: [],
     files: ["hook/visibility-change.ts"],
+  },
+  {
+    name: "web-socket",
+    type: "hooks:hook",
+    dependencies: [],
+    files: [
+      "hook/web-socket.ts",
+      "hook/latest.ts",
+      "hook/memoized-fn.ts",
+      "hook/unmount.ts",
+    ],
   },
   {
     name: "window-scroll",
