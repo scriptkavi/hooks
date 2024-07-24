@@ -251,7 +251,7 @@ export const docsConfig: DocsConfig = {
         },
         {
           title: "WebSocket",
-          href: "/docs/hooks/websocket",
+          href: "/docs/hooks/web-socket",
           items: [],
           label: "New"
         },
