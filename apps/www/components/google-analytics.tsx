@@ -21,7 +21,6 @@ export const GoogleAnalytics = () => {
       if (firebaseConfig?.projectId) {
         const app = initializeApp(firebaseConfig)
         if (app.name && typeof window !== "undefined") {
-          console.log(process.env.NODE_ENV)
           const analytics = getAnalytics(app)
         }
       }
