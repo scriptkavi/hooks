@@ -6,6 +6,8 @@ Empower your react project with accessible and customizable hooks. Copy paste th
 
 ![hero](apps/www/public/og.jpg)
 
+<a href="https://www.buymeacoffee.com/scriptkavi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## Documentation
 
 Visit http://hooks.scriptkavi.com/docs to view the documentation.
