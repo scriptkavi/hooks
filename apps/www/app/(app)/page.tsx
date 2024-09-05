@@ -51,6 +51,20 @@ export default function IndexPage() {
                 GitHub
               </Link>
             </Button>
+            <Link
+              href="https://www.buymeacoffee.com/scriptkavi"
+              target="_blank"
+            >
+              <Button variant="ghost" className="flex items-center space-x-2">
+                <Image
+                  src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
+                  alt="Buy me a chai"
+                  width={15}
+                  height={15}
+                />
+                <span>Buy me a chai</span>
+              </Button>
+            </Link>
           </PageActions>
           <PageFrameworks>
             <div className="flex items-center space-x-2">

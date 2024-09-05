@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.buymeacoffee.com",
+      },
     ],
   },
   redirects() {

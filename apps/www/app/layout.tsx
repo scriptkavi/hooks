@@ -1,6 +1,7 @@
 /* eslint-disable tailwindcss/classnames-order */
 import "@/styles/globals.css"
 import { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { AxiomWebVitals } from "next-axiom"
 
 import { siteConfig } from "@/config/site"
