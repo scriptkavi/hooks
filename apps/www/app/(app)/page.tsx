@@ -48,7 +48,7 @@ export default function IndexPage() {
                 rel="noreferrer"
                 href={siteConfig.links.github}
               >
-                GitHub
+                Star on GitHub
               </Link>
             </Button>
             <Link
