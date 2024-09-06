@@ -55,7 +55,7 @@ export default function IndexPage() {
               href="https://www.buymeacoffee.com/scriptkavi"
               target="_blank"
             >
-              <Button variant="ghost" className="flex items-center space-x-2">
+              {/* <Button variant="ghost" className="flex items-center space-x-2">
                 <Image
                   src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
                   alt="Buy me a chai"
@@ -63,7 +63,8 @@ export default function IndexPage() {
                   height={15}
                 />
                 <span>Buy me a chai</span>
-              </Button>
+              </Button> */}
+              <Icons.buymeachai className="h-9 w-32" />
             </Link>
           </PageActions>
           <PageFrameworks>
