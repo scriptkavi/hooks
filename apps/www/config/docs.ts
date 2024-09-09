@@ -60,7 +60,6 @@ export const docsConfig: DocsConfig = {
           title: "Cookies",
           href: "/docs/hooks/cookies",
           items: [],
-          label: "New"
         },
         {
           title: "Copy to Clipboard",
@@ -131,7 +130,6 @@ export const docsConfig: DocsConfig = {
           title: "Latest",
           href: "/docs/hooks/latest",
           items: [],
-          label: "New"
         },
         {
           title: "List",
@@ -242,7 +240,6 @@ export const docsConfig: DocsConfig = {
           title: "Unmount",
           href: "/docs/hooks/unmount",
           items: [],
-          label: "New"
         },
         {
           title: "Visibility Change",
@@ -253,7 +250,6 @@ export const docsConfig: DocsConfig = {
           title: "WebSocket",
           href: "/docs/hooks/web-socket",
           items: [],
-          label: "New"
         },
         {
           title: "Window Scroll",
@@ -266,6 +262,59 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         
+      ]
+    },
+    {
+      title: "Algorithm Hooks",
+      items: [
+        {
+          title: "Breadth First Search",
+          href: "/docs/hooks/breadth-first-search",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Binary Search",
+          href: "/docs/hooks/binary-search",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Depth First Search",
+          href: "/docs/hooks/depth-first-search",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Dijkstra",
+          href: "/docs/hooks/dijkstra",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Graham Scan",
+          href: "/docs/hooks/graham-scan",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Greedy",
+          href: "/docs/hooks/greedy",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Merge Sort",
+          href: "/docs/hooks/merge-sort",
+          items: [],
+          label: "New"
+        },
+        {
+          title: "Quick Sort",
+          href: "/docs/hooks/quick-sort",
+          items: [],
+          label: "New"
+        },
       ]
     },
     {

@@ -1,263 +1,303 @@
 <?xml version="1.0" encoding="UTF-8"?>
-		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-	<loc>https://hooks.scriptkavi.com</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.2</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/installation</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks-json</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/cli</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/changelog</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/battery</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/click-away</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/cookies</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/copy-to-clipboard</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/counter</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/debounce</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/default</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/document-title</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/favicon</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/geolocation</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/history-state</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/hover</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/idle</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/intersection-observer</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/is-client</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/is-first-render</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/latest</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.1</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/list</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/local-storage</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/lock-body-scroll</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/long-press</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/map</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/measure</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/media-query</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/mouse</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/network-state</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/object-state</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/orientation</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/preferred-language</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/previous</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/queue</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/render-count</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/render-info</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/script</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/session-storage</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/set</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/throttle</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/toggle</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/unmount</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/visibility-change</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/web-socket</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/window-scroll</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/hooks/window-size</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/about</loc>
-	<lastmod>2024-07-24T17:21:33+01:00</lastmod>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/installation/next</loc>
-	<lastmod>2024-07-24T17:21:36+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/installation/vite</loc>
-	<lastmod>2024-07-24T17:21:36+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
-<url>
-	<loc>https://hooks.scriptkavi.com/docs/installation/manual</loc>
-	<lastmod>2024-07-24T17:21:36+01:00</lastmod>
-	<priority>0.6</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://hooks.scriptkavi.com</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/installation</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks-json</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/cli</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/changelog</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/battery</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/click-away</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/cookies</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/copy-to-clipboard</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/counter</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/debounce</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/default</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/document-title</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/favicon</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/geolocation</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/history-state</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/hover</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/idle</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/intersection-observer</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/is-client</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/is-first-render</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/latest</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.1</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/list</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/local-storage</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/lock-body-scroll</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/long-press</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/map</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/measure</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/media-query</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/mouse</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/network-state</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/object-state</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/orientation</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/preferred-language</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/previous</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/queue</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/render-count</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/render-info</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/script</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/session-storage</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/set</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/throttle</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/toggle</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/unmount</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/visibility-change</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/web-socket</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/window-scroll</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/window-size</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/about</loc>
+    <lastmod>2024-07-24T17:21:33+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/installation/next</loc>
+    <lastmod>2024-07-24T17:21:36+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/installation/vite</loc>
+    <lastmod>2024-07-24T17:21:36+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/installation/manual</loc>
+    <lastmod>2024-07-24T17:21:36+01:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/merge-sort</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/quick-sort</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/binary-search</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/dijkstra</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/breadth-first-search</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/depth-first-search</loc>
+    <lastmod>2024-09-06T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/greedy</loc>
+    <lastmod>2024-09-09T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hooks.scriptkavi.com/docs/hooks/graham-scan</loc>
+    <lastmod>2024-09-09T17:21:36+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>

@@ -1,0 +1,231 @@
+---
+title: Merge Sort
+description: A hook for implementing merge sort.
+component: true
+---
+
+## About
+
+The `useMergeSort` hook is a custom React hook that provides an easy-to-use interface for implementing the Merge Sort algorithm. It can sort arrays of numbers or complex objects with custom comparison logic. The hook also provides state management for the sorting process, supports callback functions upon completion, and allows resetting the sorting state.
+
+## Parameters
+
+| Name       | Type                         | Description                                                                    |
+| ---------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| array      | `T[]`                        | The array to be sorted. This parameter is required when calling `startSort`.   |
+| comparator | `(a: T, b: T) => number`     | Optional. Custom comparison function for sorting complex data types (objects). |
+| onComplete | `(sortedArray: T[]) => void` | Optional. Callback function that gets called after sorting completes.          |
+
+## Return Values
+
+| Name        | Type                                                                                            | Description                                                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| sortedArray | `T[]`                                                                                           | The sorted array after the sorting process completes.                                         |
+| isSorting   | `boolean`                                                                                       | A boolean indicating if the sorting process is currently in progress.                         |
+| startSort   | `(array: T[], comparator?: (a: T, b: T) => number, onComplete?: (sorted: T[]) => void) => void` | A function that initiates the merge sort process on the given array.                          |
+| reset       | `() => void`                                                                                    | A function to reset the hook's state, clearing the sorted array and resetting sorting status. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add merge-sort
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="merge-sort" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useMergeSort } from "@/hooks/merge-sort"
+```
+
+### Basic Sorting of Numbers
+
+```tsx
+import React, { useState } from "react"
+
+function NumberSortComponent() {
+  const [array, setArray] = useState<number[]>([10, 5, 8, 3, 6, 1, 9])
+  const { sortedArray, isSorting, startSort, reset } = useMergeSort<number>()
+
+  return (
+    <div>
+      <h3>Original Array: {array.join(", ")}</h3>
+      <h3>Sorted Array: {sortedArray.join(", ")}</h3>
+
+      <button onClick={() => startSort(array)} disabled={isSorting}>
+        {isSorting ? "Sorting..." : "Sort Numbers"}
+      </button>
+      <button onClick={reset} disabled={isSorting}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default NumberSortComponent
+```
+
+### Sorting Objects with a Custom Comparator
+
+```tsx
+import React, { useState } from "react"
+
+type Person = {
+  name: string
+  age: number
+}
+
+function ObjectSortComponent() {
+  const [people, setPeople] = useState<Person[]>([
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 22 },
+    { name: "Charlie", age: 30 },
+    { name: "David", age: 28 },
+  ])
+
+  const { sortedArray, isSorting, startSort, reset } = useMergeSort<Person>()
+
+  const compareByAge = (a: Person, b: Person) => a.age - b.age
+
+  return (
+    <div>
+      <h3>Original People Array:</h3>
+      <ul>
+        {people.map((person) => (
+          <li key={person.name}>
+            {person.name} - {person.age} years old
+          </li>
+        ))}
+      </ul>
+
+      <h3>Sorted People Array (by age):</h3>
+      <ul>
+        {sortedArray.map((person) => (
+          <li key={person.name}>
+            {person.name} - {person.age} years old
+          </li>
+        ))}
+      </ul>
+
+      <button
+        onClick={() => startSort(people, compareByAge)}
+        disabled={isSorting}
+      >
+        {isSorting ? "Sorting..." : "Sort by Age"}
+      </button>
+      <button onClick={reset} disabled={isSorting}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default ObjectSortComponent
+```
+
+### Sorting Completion Callback
+
+You can pass an optional callback to `startSort`, which will be invoked when the sorting completes:
+
+```tsx
+import React from "react"
+
+const CallbackSortComponent = () => {
+  const array = [3, 5, 1, 6, 4, 2]
+  const { startSort, sortedArray, isSorting } = useMergeSort<number>()
+
+  return (
+    <div>
+      <h3>Sorted Array: {sortedArray.join(", ")}</h3>
+
+      <button
+        onClick={() =>
+          startSort(array, undefined, (sorted) => {
+            console.log("Sorting complete!", sorted)
+          })
+        }
+        disabled={isSorting}
+      >
+        {isSorting ? "Sorting..." : "Sort Array"}
+      </button>
+    </div>
+  )
+}
+
+export default CallbackSortComponent
+```
+
+### Resetting the Sorting State
+
+The `reset` function can be called to reset the sorting state, clearing the `sortedArray` and resetting the `isSorting` flag:
+
+```tsx
+import React from "react"
+
+const ResetSortComponent = () => {
+  const array = [9, 3, 5, 7, 1, 8]
+  const { startSort, sortedArray, isSorting, reset } = useMergeSort<number>()
+
+  return (
+    <div>
+      <h3>Sorted Array: {sortedArray.join(", ")}</h3>
+
+      <button onClick={() => startSort(array)} disabled={isSorting}>
+        {isSorting ? "Sorting..." : "Sort Array"}
+      </button>
+
+      <button onClick={reset} disabled={isSorting}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default ResetSortComponent
+```
+
+### Custom Comparator Example
+
+The `useMergeSort` hook supports custom comparators, allowing you to sort complex data types like objects. For instance, sorting people by their `age` can be done as follows:
+
+```tsx
+const compareByAge = (a: Person, b: Person) => a.age - b.age
+```
+
+You can pass this comparator function as the second argument to `startSort` to sort the array based on a custom logic.
+
+### Considerations for Large Data Sets
+
+For large datasets, you might consider using asynchronous techniques such as `requestIdleCallback`, `setTimeout`, or `web workers` to avoid blocking the UI during the sorting process.
