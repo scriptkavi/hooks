@@ -1,0 +1,152 @@
+---
+title: Graham Scan
+description: A hook for implementing graham scan.
+component: true
+---
+
+## About
+
+The `useGrahamScan` hook provides an efficient implementation of the Graham Scan algorithm to compute the convex hull of a set of points on a 2D plane. The convex hull is the smallest polygon that encloses all given points. The algorithm sorts the points based on their polar angle with respect to a reference point and then processes the points to construct the convex hull.
+
+## Parameters
+
+| Name       | Type                                              | Description                                                                         |
+| ---------- | ------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| points     | `Array<{ x: number; y: number }>`                 | The array of points, where each point has an `x` and `y` coordinate.                |
+| onComplete | `(hull: Array<{ x: number; y: number }>) => void` | Optional. A callback function that gets triggered when the convex hull is computed. |
+
+## Return Values
+
+| Name         | Type                                                                                                              | Description                                                                           |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| convexHull   | `Array<{ x: number; y: number }>`                                                                                 | The array of points representing the convex hull.                                     |
+| isProcessing | `boolean`                                                                                                         | A boolean indicating if the convex hull is currently being computed.                  |
+| startScan    | `(points: Array<{ x: number; y: number }>, onComplete?: (hull: Array<{ x: number; y: number }>) => void) => void` | A function to start the Graham Scan for the given points.                             |
+| reset        | `() => void`                                                                                                      | A function to reset the hook’s state, clearing the convex hull and processing status. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add graham-scan
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="graham-scan" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useGrahamScan } from "@/hooks/graham-scan"
+```
+
+### Computing the Convex Hull of a Set of Points
+
+```tsx
+import React, { useState } from "react"
+
+import useGrahamScan from "./useGrahamScan"
+
+type Point = { x: number; y: number }
+
+const points: Point[] = [
+  { x: 0, y: 3 },
+  { x: 2, y: 2 },
+  { x: 1, y: 1 },
+  { x: 2, y: 1 },
+  { x: 3, y: 0 },
+  { x: 0, y: 0 },
+  { x: 3, y: 3 },
+]
+
+function GrahamScanComponent() {
+  const { convexHull, isProcessing, startScan, reset } = useGrahamScan()
+
+  return (
+    <div>
+      <h3>Points:</h3>
+      <ul>
+        {points.map((point, idx) => (
+          <li key={idx}>
+            ({point.x}, {point.y})
+          </li>
+        ))}
+      </ul>
+
+      <button onClick={() => startScan(points)} disabled={isProcessing}>
+        {isProcessing ? "Processing..." : "Compute Convex Hull"}
+      </button>
+
+      <button onClick={reset} disabled={isProcessing}>
+        Reset
+      </button>
+
+      <h3>Convex Hull:</h3>
+      <ul>
+        {convexHull.map((point, idx) => (
+          <li key={idx}>
+            ({point.x}, {point.y})
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default GrahamScanComponent
+```
+
+### Explanation of Key Functions
+
+- **crossProduct**: This function computes the cross product to determine the orientation of the turn between three points (o, a, b). A positive result means a counter-clockwise turn, negative means clockwise, and zero means collinear.
+- **polarAngleSort**: This function sorts the points by their polar angle relative to a starting point. In case of a tie (collinear points), the points are sorted by distance from the start.
+- **grahamScan**: This function implements the main logic of the Graham Scan algorithm. It sorts the points, initializes the convex hull, and processes the remaining points to construct the final hull.
+
+### Example Output
+
+If the input points are:
+
+```
+Points: (0, 3), (2, 2), (1, 1), (2, 1), (3, 0), (0, 0), (3, 3)
+```
+
+The computed convex hull might look like:
+
+```
+Convex Hull: (0, 0), (3, 0), (3, 3), (0, 3)
+```
+
+### Considerations
+
+- **Minimum Points**: The convex hull requires at least 3 points to form a valid polygon. If fewer points are provided, the algorithm returns the points themselves.
+- **Handling Collinear Points**: The algorithm correctly handles collinear points, ensuring they are part of the convex hull if necessary.
+- **Edge Case of Coinciding Points**: Points that are the same or very close may result in computational issues. For such cases, precision might need to be handled carefully (e.g., using a tolerance level).

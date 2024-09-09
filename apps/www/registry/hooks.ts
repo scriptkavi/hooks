@@ -265,4 +265,52 @@ export const hooks: Registry = [
     dependencies: [],
     files: ["hook/window-size.ts"],
   },
+  {
+    name: "merge-sort",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/merge-sort.ts"],
+  },
+  {
+    name: "quick-sort",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/quick-sort.ts"],
+  },
+  {
+    name: "binary-search",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/binary-search.ts"],
+  },
+  {
+    name: "dijkstra",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/dijkstra.ts"],
+  },
+  {
+    name: "breadth-first-search",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/breadth-first-search.ts"],
+  },
+  {
+    name: "depth-first-search",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/depth-first-search.ts"],
+  },
+  {
+    name: "greedy",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/greedy.ts"],
+  },
+  {
+    name: "graham-scan",
+    type: "hooks:hook",
+    dependencies: [],
+    files: ["hook/graham-scan.ts"],
+  },
 ]

@@ -1,0 +1,160 @@
+---
+title: Depth First Search
+description: A hook for implementing depth first search.
+component: true
+---
+
+## About
+
+The `useDepthFirstSearch` hook is a custom React hook that provides a Depth-First Search (DFS) algorithm implementation. It allows you to explore a graph, either finding a path between nodes or simply traversing all nodes. DFS explores as deep as possible in each branch before backtracking, which is particularly useful for tasks like maze solving or tree traversal.
+
+## Parameters
+
+| Name       | Type                              | Description                                                                                                           |
+| ---------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| graph      | `Record<string, string[]>`        | The adjacency The adjacency list representation of the graph, where keys are node IDs and values are their neighbors. |
+| start      | `string`                          | The starting node from which the traversal begins.                                                                    |
+| target     | `string`                          | Optional. The target node to which the shortest path should be calculated.                                            |
+| onComplete | `(path: string[] or null) => void | Optional. Callback function that gets called after calculation completes.                                             |
+
+## Return Values
+
+| Name          | Type                                                                                                                       | Description                                                                               |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| exploredNodes | `string[]`                                                                                                                 | The nodes that have been explored in the DFS traversal.                                   |
+| path          | `string[]` or `null`                                                                                                       |                                                                                           |
+| isProcessing  | `boolean`                                                                                                                  | A boolean indicating if the algorithm is currently running.                               |
+| startDFS      | `(graph: Record<string, string[]>, start: string, target?: string, onComplete?: (path: string[] or null) => void) => void` |                                                                                           |
+| reset         | `() => void`                                                                                                               | Function to reset the hook’s state, clearing the traversal results and processing status. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add depth-first-search
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="depth-first-search" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useDepthFirstSearch } from "@/hooks/depth-first-search"
+```
+
+### DFS Traversal of a Graph
+
+```tsx
+import React from "react"
+
+const graph = {
+  A: ["B", "C"],
+  B: ["A", "D", "E"],
+  C: ["A", "F"],
+  D: ["B"],
+  E: ["B", "F"],
+  F: ["C", "E"],
+}
+
+function DFSComponent() {
+  const { exploredNodes, path, isProcessing, startDFS, reset } =
+    useDepthFirstSearch()
+
+  return (
+    <div>
+      <h3>Graph: {JSON.stringify(graph)}</h3>
+      <h3>Explored Nodes: {exploredNodes.join(" -> ")}</h3>
+      <h3>Path from A to F: {path ? path.join(" -> ") : "No Path Found"}</h3>
+
+      <button onClick={() => startDFS(graph, "A", "F")} disabled={isProcessing}>
+        {isProcessing ? "Processing..." : "Start DFS from A to F"}
+      </button>
+
+      <button onClick={reset} disabled={isProcessing}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default DFSComponent
+```
+
+### Completion Callback
+
+You can pass a completion callback to the `startDFS` function that will be triggered when the DFS traversal completes. This is useful if you want to trigger additional actions based on the traversal result.
+
+```tsx
+import React from "react"
+
+const graph = {
+  A: ["B", "C"],
+  B: ["A", "D", "E"],
+  C: ["A", "F"],
+  D: ["B"],
+  E: ["B", "F"],
+  F: ["C", "E"],
+}
+
+const DFSCallbackComponent = () => {
+  const { startDFS, exploredNodes, path, isProcessing } = useDepthFirstSearch()
+
+  return (
+    <div>
+      <h3>Explored Nodes: {exploredNodes.join(" -> ")}</h3>
+      <h3>Path from A to F: {path ? path.join(" -> ") : "No Path"}</h3>
+
+      <button
+        onClick={() =>
+          startDFS(graph, "A", "F", (resultPath) => {
+            console.log("Traversal Complete. Path:", resultPath)
+          })
+        }
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Processing..." : "Start DFS with Callback"}
+      </button>
+    </div>
+  )
+}
+
+export default DFSCallbackComponent
+```
+
+### Considerations
+
+- **Disconnected Nodes**: If the graph contains nodes that are disconnected from the rest of the graph, the DFS traversal will only explore the connected components starting from the given start node.
+
+- **Cycle Handling**: The DFS algorithm properly avoids cycles by marking nodes as explored.
+
+- **Deep Recursion**: DFS can lead to deep recursion, especially in large or deep graphs. If you anticipate very large graphs, you might need to handle stack overflows (e.g., by using an iterative DFS approach with a stack).
