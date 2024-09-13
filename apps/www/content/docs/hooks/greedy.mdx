@@ -1,0 +1,200 @@
+---
+title: Greedy
+description: A hook for implementing greedy.
+component: true
+---
+
+## About
+
+The `useGreedyAlgorithm` hook provides a generic framework for solving problems using a greedy approach. It is flexible enough to handle a variety of greedy algorithms, including those that aim to optimize results based on a set of criteria. Examples include problems like the Activity Selection Problem, Fractional Knapsack Problem, Coin Change Problem, and more.
+
+## Parameters
+
+| Name         | Type                                      | Description                                                                                            |
+| ------------ | ----------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| problemData  | `T[]`                                     | The data set on which the greedy algorithm will operate.                                               |
+| greedyChoice | `(data: T[]) => T`                        | A function defining the greedy choice, which determines the next step in the algorithm.                |
+| isFeasible   | `(solution: T[], nextStep: T) => boolean` | Optional. A function that checks if adding the next step to the current solution is valid or feasible. |
+| onComplete   | `(solution: T[]) => void	`                 | Optional. A callback that gets triggered after the algorithm completes, returning the final solution.  |
+
+## Return Values
+
+| Name         | Type                                                                                                                                                     | Description                                                                               |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| solution     | `T[]`                                                                                                                                                    | The result after the greedy algorithm has been applied to the problem data.               |
+| isProcessing | `boolean`                                                                                                                                                | A boolean indicating if the greedy algorithm is currently running.                        |
+| startGreedy  | `(problemData: T[], greedyChoice: (data: T[]) => T, isFeasible?: (solution: T[], nextStep: T) => boolean, onComplete?: (solution: T[]) => void) => void` | A function to start the greedy algorithm with the given problem data and choice function. |
+| reset        | `() => void`                                                                                                                                             | A function to reset the hook's state, clearing the solution and resetting the status.     |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add greedy
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="greedy" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useGreedyAlgorithm } from "@/hooks/greedy"
+```
+
+### Solving the Activity Selection Problem
+
+In this example, we will solve the Activity Selection Problem using the greedy algorithm. The goal is to select the maximum number of non-overlapping activities, each defined by a start and end time.
+
+```tsx
+import React, { useState } from "react"
+
+type Activity = {
+  name: string
+  start: number
+  end: number
+}
+
+const activities: Activity[] = [
+  { name: "A1", start: 1, end: 2 },
+  { name: "A2", start: 3, end: 4 },
+  { name: "A3", start: 0, end: 6 },
+  { name: "A4", start: 5, end: 7 },
+  { name: "A5", start: 8, end: 9 },
+  { name: "A6", start: 5, end: 9 },
+]
+
+function GreedyActivitySelectionComponent() {
+  const { solution, isProcessing, startGreedy, reset } =
+    useGreedyAlgorithm<Activity>()
+
+  // Greedy choice: select the activity that finishes the earliest
+  const greedyChoice = (data: Activity[]): Activity => {
+    return data.reduce(
+      (earliest, activity) =>
+        activity.end < earliest.end ? activity : earliest,
+      data[0]
+    )
+  }
+
+  // Feasibility check: the selected activity should not overlap with the last selected activity
+  const isFeasible = (
+    solution: Activity[],
+    nextActivity: Activity
+  ): boolean => {
+    if (solution.length === 0) return true
+    const lastActivity = solution[solution.length - 1]
+    return nextActivity.start >= lastActivity.end
+  }
+
+  return (
+    <div>
+      <h3>
+        Activities:{" "}
+        {activities.map((a) => `${a.name}(${a.start},${a.end})`).join(", ")}
+      </h3>
+      <h3>Selected Activities: {solution.map((a) => a.name).join(", ")}</h3>
+
+      <button
+        onClick={() => startGreedy(activities, greedyChoice, isFeasible)}
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Processing..." : "Select Activities"}
+      </button>
+
+      <button onClick={reset} disabled={isProcessing}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default GreedyActivitySelectionComponent
+```
+
+### Coin Change Problem
+
+This example solves the Coin Change Problem, where we aim to minimize the number of coins needed to make a given amount using the largest coin denominations first.
+
+```tsx
+import React, { useState } from "react"
+
+import useGreedyAlgorithm from "./useGreedyAlgorithm"
+
+const coins = [25, 10, 5, 1]
+
+function GreedyCoinChangeComponent() {
+  const { solution, isProcessing, startGreedy, reset } =
+    useGreedyAlgorithm<number>()
+
+  // Greedy choice: select the largest coin that is less than or equal to the remaining amount
+  const greedyChoice = (data: number[], remainingAmount: number): number => {
+    return data.find((coin) => coin <= remainingAmount)!
+  }
+
+  const handleCoinChange = (amount: number) => {
+    let remainingAmount = amount
+    startGreedy(
+      coins,
+      (data) => greedyChoice(data, remainingAmount),
+      undefined,
+      (coinSolution) => {
+        remainingAmount =
+          remainingAmount - coinSolution.reduce((sum, coin) => sum + coin, 0)
+      }
+    )
+  }
+
+  return (
+    <div>
+      <h3>Available Coins: {coins.join(", ")}</h3>
+      <h3>Selected Coins: {solution.join(", ")}</h3>
+
+      <button onClick={() => handleCoinChange(41)} disabled={isProcessing}>
+        {isProcessing ? "Processing..." : "Get Change for 41"}
+      </button>
+
+      <button onClick={reset} disabled={isProcessing}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default GreedyCoinChangeComponent
+```
+
+### Considerations
+
+- **Greedy Choice Function**: The greedy choice function should be designed to make the most immediate and beneficial choice at each step.
+- **Feasibility Check**: Some problems require checking if the greedy choice can be added to the solution (e.g., non-overlapping activities). If this isn’t needed, you can omit the isFeasible function.
+- **Not Always Optimal**: The greedy approach does not guarantee an optimal solution for all problems. However, for many problems (like the Activity Selection Problem or Fractional Knapsack), it does yield an optimal result.

@@ -1,0 +1,11 @@
+{
+  "name": "quick-sort",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "quick-sort.ts",
+      "content": "import { useState, useCallback } from 'react';\n\ninterface UseQuickSortReturn<T> {\n  sortedArray: T[];\n  isSorting: boolean;\n  startSort: (\n    array: T[],\n    comparator?: (a: T, b: T) => number,\n    onComplete?: (sortedArray: T[]) => void\n  ) => void;\n  reset: () => void;\n}\n\nfunction useQuickSort<T = number>(): UseQuickSortReturn<T> {\n  const [sortedArray, setSortedArray] = useState<T[]>([]);\n  const [isSorting, setIsSorting] = useState<boolean>(false);\n\n  // Default comparator for primitive types\n  const defaultComparator = (a: T, b: T): number => {\n    if (a < b) return -1;\n    if (a > b) return 1;\n    return 0;\n  };\n\n  // Quick sort algorithm implementation\n  const quickSort = useCallback(\n    (array: T[], comparator: (a: T, b: T) => number): T[] => {\n      if (array.length <= 1) {\n        return array;\n      }\n\n      const pivotIndex = Math.floor(array.length / 2);\n      const pivot = array[pivotIndex];\n\n      const left = array.filter((item, index) => index !== pivotIndex && comparator(item, pivot) < 0);\n      const right = array.filter((item, index) => index !== pivotIndex && comparator(item, pivot) >= 0);\n\n      return [...quickSort(left, comparator), pivot, ...quickSort(right, comparator)];\n    },\n    []\n  );\n\n  // Start sorting function\n  const startSort = useCallback(\n    (array: T[], comparator: (a: T, b: T) => number = defaultComparator, onComplete?: (sortedArray: T[]) => void) => {\n      if (!Array.isArray(array)) {\n        throw new Error('Input must be an array');\n      }\n      if (!array.length) {\n        setSortedArray([]);\n        if (onComplete) onComplete([]);\n        return;\n      }\n\n      setIsSorting(true);\n      const sorted = quickSort(array, comparator);\n      setSortedArray(sorted);\n      setIsSorting(false);\n\n      if (onComplete) onComplete(sorted);\n    },\n    [quickSort]\n  );\n\n  // Reset the hook state\n  const reset = useCallback(() => {\n    setSortedArray([]);\n    setIsSorting(false);\n  }, []);\n\n  return {\n    sortedArray,\n    isSorting,\n    startSort,\n    reset,\n  };\n}\n\nexport default useQuickSort;\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

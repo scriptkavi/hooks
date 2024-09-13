@@ -1,0 +1,11 @@
+{
+  "name": "binary-search",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "binary-search.ts",
+      "content": "import { useState, useCallback } from 'react';\n\ninterface UseBinarySearchReturn<T> {\n  foundIndex: number | null;\n  isSearching: boolean;\n  startSearch: (\n    array: T[],\n    target: T,\n    comparator?: (a: T, b: T) => number,\n    onComplete?: (index: number | null) => void\n  ) => void;\n  reset: () => void;\n}\n\nfunction useBinarySearch<T = number>(): UseBinarySearchReturn<T> {\n  const [foundIndex, setFoundIndex] = useState<number | null>(null);\n  const [isSearching, setIsSearching] = useState<boolean>(false);\n\n  const defaultComparator = (a: T, b: T): number => {\n    if (a < b) return -1;\n    if (a > b) return 1;\n    return 0;\n  };\n\n  const binarySearch = useCallback(\n    (array: T[], target: T, comparator: (a: T, b: T) => number): number | null => {\n      let low = 0;\n      let high = array.length - 1;\n\n      while (low <= high) {\n        const mid = Math.floor((low + high) / 2);\n        const comparison = comparator(array[mid], target);\n\n        if (comparison === 0) {\n          return mid;\n        } else if (comparison < 0) {\n          low = mid + 1;\n        } else {\n          high = mid - 1;\n        }\n      }\n      return null;\n    },\n    []\n  );\n\n  const startSearch = useCallback(\n    (array: T[], target: T, comparator: (a: T, b: T) => number = defaultComparator, onComplete?: (index: number | null) => void) => {\n      if (!Array.isArray(array)) {\n        throw new Error('Input must be an array');\n      }\n      if (!array.length) {\n        setFoundIndex(null);\n        if (onComplete) onComplete(null);\n        return;\n      }\n\n      setIsSearching(true);\n      const index = binarySearch(array, target, comparator);\n      setFoundIndex(index);\n      setIsSearching(false);\n\n      if (onComplete) onComplete(index);\n    },\n    [binarySearch]\n  );\n\n  const reset = useCallback(() => {\n    setFoundIndex(null);\n    setIsSearching(false);\n  }, []);\n\n  return {\n    foundIndex,\n    isSearching,\n    startSearch,\n    reset,\n  };\n}\n\nexport default useBinarySearch;\n"
+    }
+  ],
+  "type": "hooks:hook"
+}

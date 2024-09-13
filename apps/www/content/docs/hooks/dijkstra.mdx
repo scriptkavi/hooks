@@ -1,0 +1,169 @@
+---
+title: Dijkstra
+description: A hook for implementing dijkstra.
+component: true
+---
+
+<Callout>
+
+**Note:** This hook uses features of ES6. Make sure it is configured in your tsconfig.json file
+
+</Callout>
+
+## About
+
+The `useDijkstra` hook is a custom React hook that provides an implementation of Dijkstra’s shortest path algorithm. It is designed to calculate the shortest path from a starting node to a target node in a graph. The hook supports graphs represented as adjacency lists, handles edge cases like disconnected nodes, and allows dynamic updates to the graph structure.
+
+## Parameters
+
+| Name       | Type                                                | Description                                                                                                              |
+| ---------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| graph      | `Record<string, Record<string, number>>`            | The adjacency list representation of the graph, where keys are node IDs and values are their neighbors and edge weights. |
+| start      | `string`                                            | The starting node from which to calculate the shortest path.                                                             |
+| target     | `string`                                            | The target node to which the shortest path should be calculated.                                                         |
+| onComplete | `(path: string[], distance: number or null) => void | Optional. Callback function that gets called after calculation completes.                                                |
+
+## Return Values
+
+| Name          | Type                                                                                                                                                      | Description                                                                       |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| shortestPath  | `string[]`                                                                                                                                                | The calculated shortest path as an array of node IDs.                             |
+| distance      | `number` or `null`                                                                                                                                        |                                                                                   |
+| isProcessing  | `boolean`                                                                                                                                                 | A boolean indicating if the algorithm is currently calculating the shortest path. |
+| startDijkstra | `(graph: Record<string, Record<string, number>>, start: string, target: string, onComplete?: (path: string[], distance: number or null) => void) => void` |                                                                                   |
+| reset         | `() => void`                                                                                                                                              | A function to reset the hook's state, clearing the result and processing status.  |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add dijkstra
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="dijkstra" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useDijkstra } from "@/hooks/dijkstra"
+```
+
+### Finding the Shortest Path in a Graph
+
+```tsx
+import React from "react"
+
+const graph = {
+  A: { B: 1, C: 4 },
+  B: { A: 1, C: 2, D: 5 },
+  C: { A: 4, B: 2, D: 1 },
+  D: { B: 5, C: 1 },
+}
+
+function DijkstraComponent() {
+  const { shortestPath, distance, isProcessing, startDijkstra, reset } =
+    useDijkstra()
+
+  return (
+    <div>
+      <h3>Graph: {JSON.stringify(graph)}</h3>
+      <h3>
+        Shortest Path:{" "}
+        {shortestPath.length > 0 ? shortestPath.join(" -> ") : "No Path"}
+      </h3>
+      <h3>Distance: {distance !== null ? distance : "N/A"}</h3>
+
+      <button
+        onClick={() => startDijkstra(graph, "A", "D")}
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Calculating..." : "Find Shortest Path from A to D"}
+      </button>
+
+      <button onClick={reset} disabled={isProcessing}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default DijkstraComponent
+```
+
+### Completion Callback
+
+You can also pass a completion callback that will be triggered when the algorithm completes, allowing you to execute additional logic after the shortest path has been calculated.
+
+```tsx
+import React from "react"
+
+const graph = {
+  A: { B: 1, C: 4 },
+  B: { A: 1, C: 2, D: 5 },
+  C: { A: 4, B: 2, D: 1 },
+  D: { B: 5, C: 1 },
+}
+
+const DijkstraCallbackComponent = () => {
+  const { startDijkstra, shortestPath, distance, isProcessing } = useDijkstra()
+
+  return (
+    <div>
+      <h3>
+        Shortest Path:{" "}
+        {shortestPath.length > 0 ? shortestPath.join(" -> ") : "No Path"}
+      </h3>
+      <h3>Distance: {distance !== null ? distance : "N/A"}</h3>
+
+      <button
+        onClick={() =>
+          startDijkstra(graph, "A", "D", (path, dist) => {
+            console.log("Shortest path:", path, "Distance:", dist)
+          })
+        }
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Calculating..." : "Find Path with Callback"}
+      </button>
+    </div>
+  )
+}
+
+export default DijkstraCallbackComponent
+```
+
+### Considerations
+
+- Non-Negative Weights: Dijkstra’s algorithm assumes non-negative edge weights. If negative weights are present, consider using the Bellman-Ford algorithm instead.
+
+- Disconnected Graph: If there is no path between the start and target nodes, the hook will return null for both the shortest path and distance.

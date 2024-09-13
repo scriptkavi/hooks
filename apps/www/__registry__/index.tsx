@@ -478,5 +478,93 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "merge-sort": {
+      name: "merge-sort",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/merge-sort")),
+      source: "",
+      files: ["registry/react-hooks/hook/merge-sort.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "quick-sort": {
+      name: "quick-sort",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/quick-sort")),
+      source: "",
+      files: ["registry/react-hooks/hook/quick-sort.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "binary-search": {
+      name: "binary-search",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/binary-search")),
+      source: "",
+      files: ["registry/react-hooks/hook/binary-search.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "dijkstra": {
+      name: "dijkstra",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/dijkstra")),
+      source: "",
+      files: ["registry/react-hooks/hook/dijkstra.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "breadth-first-search": {
+      name: "breadth-first-search",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/breadth-first-search")),
+      source: "",
+      files: ["registry/react-hooks/hook/breadth-first-search.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "depth-first-search": {
+      name: "depth-first-search",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/depth-first-search")),
+      source: "",
+      files: ["registry/react-hooks/hook/depth-first-search.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "greedy": {
+      name: "greedy",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/greedy")),
+      source: "",
+      files: ["registry/react-hooks/hook/greedy.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "graham-scan": {
+      name: "graham-scan",
+      type: "hooks:hook",
+      registryDependencies: undefined,
+      component: React.lazy(() => import("@/registry/react-hooks/hook/graham-scan")),
+      source: "",
+      files: ["registry/react-hooks/hook/graham-scan.ts"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
   },
 }

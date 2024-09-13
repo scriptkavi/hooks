@@ -1,0 +1,211 @@
+---
+title: Binary Search
+description: A hook for implementing binary search.
+component: true
+---
+
+## About
+
+The `useBinarySearch` hook is a custom React hook that provides a binary search algorithm implementation. It supports searching in a sorted array of primitive values or complex objects, with an option to define custom comparison logic. The hook handles various edge cases, such as empty arrays, unsorted arrays, and invalid inputs, ensuring robustness in production.
+
+## Parameters
+
+| Name       | Type                              | Description                                                                                             |
+| ---------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| array      | `T[]`                             | The sorted array in which to perform the search. This parameter is required when calling `startSearch`. |
+| target     | `T`                               | The target value to search for in the array.                                                            |
+| comparator | `(a: T, b: T) => number`          | Optional. Custom comparison function for sorting complex data types (objects).                          |
+| onComplete | `(index: number or null) => void` | Optional. Callback function that gets called after searching completes.                                 |
+
+## Return Values
+
+| Name        | Type                                                                                                                 | Description                                                                                       |
+| ----------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| foundIndex  | `number` or `null`                                                                                                   | The sorted array after the sorting process completes.                                             |
+| isSearching | `boolean`                                                                                                            | A boolean indicating if the search is currently in progress.                                      |
+| startSearch | `(array: T[], target: T, comparator?: (a: T, b: T) => number, onComplete?: (index: number or null) => void) => void` | A function that initiates the binary search process on the given array.                           |
+| reset       | `() => void`                                                                                                         | A function to reset the hook's state, clearing the search result and resetting the search status. |
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx scriptkavi-hooks@latest add binary-search
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="binary-search" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { useBinarySearch } from "@/hooks/binary-search"
+```
+
+### Basic
+
+```tsx
+import React, { useState } from "react"
+
+function BinarySearchComponent() {
+  const [array, setArray] = useState<number[]>([1, 3, 5, 7, 9, 11, 13, 15])
+  const { foundIndex, isSearching, startSearch, reset } =
+    useBinarySearch<number>()
+
+  return (
+    <div>
+      <h3>Array: {array.join(", ")}</h3>
+      <h3>Found Index: {foundIndex !== null ? foundIndex : "Not Found"}</h3>
+
+      <button onClick={() => startSearch(array, 7)} disabled={isSearching}>
+        {isSearching ? "Searching..." : "Search for 7"}
+      </button>
+
+      <button onClick={reset} disabled={isSearching}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default BinarySearchComponent
+```
+
+### Binary Search with Custom Comparator
+
+You can search through an array of objects by providing a custom comparator function. Here is an example where we search for an object in an array based on a property (e.g. `age`).
+
+```tsx
+import React, { useState } from "react"
+
+type Person = {
+  name: string
+  age: number
+}
+
+function ObjectBinarySearchComponent() {
+  const [people] = useState<Person[]>([
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 },
+    { name: "Charlie", age: 35 },
+    { name: "David", age: 40 },
+  ])
+
+  const { foundIndex, isSearching, startSearch, reset } =
+    useBinarySearch<Person>()
+
+  const compareByAge = (a: Person, b: Person) => a.age - b.age
+
+  return (
+    <div>
+      <h3>People:</h3>
+      <ul>
+        {people.map((person) => (
+          <li key={person.name}>
+            {person.name} - {person.age} years old
+          </li>
+        ))}
+      </ul>
+
+      <h3>Found Index: {foundIndex !== null ? foundIndex : "Not Found"}</h3>
+
+      <button
+        onClick={() => startSearch(people, { name: "", age: 35 }, compareByAge)}
+        disabled={isSearching}
+      >
+        {isSearching ? "Searching..." : "Search for age 35"}
+      </button>
+
+      <button onClick={reset} disabled={isSearching}>
+        Reset
+      </button>
+    </div>
+  )
+}
+
+export default ObjectBinarySearchComponent
+```
+
+### Completion Callback
+
+You can also pass a callback function that will be triggered when the search is complete, allowing you to execute additional logic after the search finishes.
+
+```tsx
+import React from "react"
+
+const CompletionCallbackComponent = () => {
+  const array = [2, 4, 6, 8, 10, 12, 14]
+  const { startSearch, foundIndex, isSearching } = useBinarySearch<number>()
+
+  return (
+    <div>
+      <h3>Array: {array.join(", ")}</h3>
+      <h3>Found Index: {foundIndex !== null ? foundIndex : "Not Found"}</h3>
+
+      <button
+        onClick={() =>
+          startSearch(array, 10, undefined, (index) => {
+            console.log("Search completed. Index found:", index)
+          })
+        }
+        disabled={isSearching}
+      >
+        {isSearching ? "Searching..." : "Search for 10"}
+      </button>
+    </div>
+  )
+}
+
+export default CompletionCallbackComponent
+```
+
+### Custom Comparator Example
+
+You can use a custom comparator function to search through arrays of objects or other complex data types. The comparator should return:
+
+```tsx
+const compareByAge = (a: Person, b: Person) => a.age - b.age
+```
+
+You can pass this comparator function as the second argument to `startSearch` to search the array based on a custom logic.
+
+### Considerations
+
+- Array Must Be Sorted: Ensure that the input array is sorted based on the
+  same criteria used by the comparator function for accurate results.
+
+- Edge Cases: The hook handles cases like empty arrays, arrays with one
+  element, and invalid inputs.
+
+- Asynchronous Search: You can introduce asynchronous behavior (e.g.,
+  setTimeout or requestIdleCallback) to prevent blocking the UI during long
+  searches.

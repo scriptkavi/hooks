@@ -1,0 +1,11 @@
+{
+  "name": "greedy",
+  "dependencies": [],
+  "files": [
+    {
+      "name": "greedy.ts",
+      "content": "import { useState, useCallback } from 'react';\n\ninterface UseGreedyAlgorithmReturn<T> {\n  solution: T[];\n  isProcessing: boolean;\n  startGreedy: (\n    problemData: T[],\n    greedyChoice: (data: T[]) => T,\n    isFeasible?: (solution: T[], nextStep: T) => boolean,\n    onComplete?: (solution: T[]) => void\n  ) => void;\n  reset: () => void;\n}\n\nfunction useGreedyAlgorithm<T = number>(): UseGreedyAlgorithmReturn<T> {\n  const [solution, setSolution] = useState<T[]>([]);\n  const [isProcessing, setIsProcessing] = useState<boolean>(false);\n\n  const greedyAlgorithm = useCallback(\n    (data: T[], greedyChoice: (data: T[]) => T, isFeasible?: (solution: T[], nextStep: T) => boolean): T[] => {\n      let solution: T[] = [];\n\n      while (data.length > 0) {\n        const nextStep = greedyChoice(data);\n        if (!isFeasible || isFeasible(solution, nextStep)) {\n          solution.push(nextStep);\n        }\n        data = data.filter(item => item !== nextStep);\n      }\n\n      return solution;\n    },\n    []\n  );\n\n  const startGreedy = useCallback(\n    (problemData: T[], greedyChoice: (data: T[]) => T, isFeasible?: (solution: T[], nextStep: T) => boolean, onComplete?: (solution: T[]) => void) => {\n      if (!Array.isArray(problemData)) {\n        throw new Error('Input must be an array');\n      }\n      if (!problemData.length) {\n        setSolution([]);\n        if (onComplete) onComplete([]);\n        return;\n      }\n\n      setIsProcessing(true);\n      const sortedSolution = greedyAlgorithm([...problemData], greedyChoice, isFeasible);\n      setSolution(sortedSolution);\n      setIsProcessing(false);\n\n      if (onComplete) onComplete(sortedSolution);\n    },\n    [greedyAlgorithm]\n  );\n\n  const reset = useCallback(() => {\n    setSolution([]);\n    setIsProcessing(false);\n  }, []);\n\n  return {\n    solution,\n    isProcessing,\n    startGreedy,\n    reset,\n  };\n}\n\nexport default useGreedyAlgorithm;\n"
+    }
+  ],
+  "type": "hooks:hook"
+}
